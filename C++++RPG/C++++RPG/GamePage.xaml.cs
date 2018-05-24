@@ -54,7 +54,12 @@ namespace C____RPG
 
         private void Start_Animation(object sender, RoutedEventArgs e)
         {
+            Blue_Circle_Animation.Duration = new Duration(new TimeSpan(5));
+            Blue_Circle_Animation.From = new Point(200, 200);
+            Blue_Circle_Animation.To = new Point(400, 400);
             myStoryboard.Begin();
+            
+            
         }
     }
 }

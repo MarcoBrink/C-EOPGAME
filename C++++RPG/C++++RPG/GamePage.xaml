@@ -16,12 +16,10 @@
 
                     <!-- Animate the center point of the ellipse from 100 X, 300 Y
              to 400 X, 100 Y over 5 seconds. -->
-                    <PointAnimation
+                    <PointAnimation x:Name="Blue_Circle_Animation"
              Storyboard.TargetProperty="Center"
              Storyboard.TargetName="MyAnimatedEllipseGeometry"
-             Duration="0:0:5" 
-             From="100,300"
-             To="400,100"
+            
              RepeatBehavior="Forever" EnableDependentAnimation="True"/>
 
                 </Storyboard>

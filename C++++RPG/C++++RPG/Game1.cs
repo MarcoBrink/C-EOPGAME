@@ -11,6 +11,7 @@ namespace C____RPG
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Texture2D whiteRectangle;
+        //private Graphics map = new Graphics(32, 30, 30);
 
         public Game1()
         {

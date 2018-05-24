@@ -3,46 +3,43 @@ namespace C____RPG
     public class Player : Game
     {
         private string name;
-        private int experience;
-        private int currentLevel;
+        private int coins;
+        private int playtime;
+        private Inventory inventory;
+		private dictionary<Skill> skills;
+        private Skill currentSkill;
+        private Location location;
+        private Story missions;
 
-        public Skill(string name)
+        public Player(string name)
         {
             this.name = name;
-            currentLevel = 0;
         }
 
-        public int GetXP()
+        public void Act()
         {
-            return experience;
+            // Alles wat gedaan moet worden
         }
 
-        public void IncreaseXP(int amount)
+        public int ChangeCoins(int amount)
         {
-            experience += amount;
-            int curlvl = (int)(0.1f * Mathf.Sqrt(experience));
-
-            if (curlvl != currentLevel)
-            {
-                //Level up!
-                currentLevel = curlvl;
-            }
-
-            //The total XP that is needed to reach the next level 
-            int totalXpNextlevel = 100 * (currentlevel + 1) + (currentlevel + 1)
-
-           //The difference between your current experience and the xp needed to reach the next level.
-            int difference = xpnextlevel - experience;
-
-            //The total experience difference between your current level and the next level
-            int totalLevelDifference
-
+            coins = coins + amount;
+            return coins;
         }
 
-        public int GetLevel()
+        public dictionary<String, dynamic> GetStats()
         {
+            int coins = clock.GetHours();
+            int minutes = clock.GetMinutes();
 
-            return level;
+            Dictionary<String, dynamic> dictionary = new Dictionary<String, dynamic>();
+            dictionary.Add("coins", coins);
+            dictionary.Add("playtime", playtime);
+            //dictionary.Add("miningxp", skills.);
+            dictionary.Add("woodcuttingxp", playtime);
+            dictionary.Add("fishingxp", playtime);
+
+            return dictionary;
         }
 
 

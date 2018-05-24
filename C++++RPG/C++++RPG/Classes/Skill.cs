@@ -1,3 +1,12 @@
+/*  
+    @author Marco Brink
+    @date   24-05-2018
+
+    @levelingSystem: 
+
+    
+*/
+
 namespace C____RPG
 {
     public class Skill : Game
@@ -5,6 +14,7 @@ namespace C____RPG
         private string name;
         private int experience;
         private int currentLevel;
+        
 
         public Skill(string name)
         {
@@ -28,20 +38,20 @@ namespace C____RPG
                currentLevel = curlvl;
            }
 
-           //The total XP that is needed to reach the next level 
-           int totalXpNextlevel = 100 * (currentlevel + 1) + (currentlevel + 1)
+            //The total XP that is needed to reach the next level 
+            int totalXpNextlevel = 100 * (currentlevel + 1) + (currentlevel + 1);
 
            //The difference between your current experience and the xp needed to reach the next level.
            int difference = xpnextlevel - experience;
 
-           //The total experience difference between your current level and the next level
-           int totalLevelDifference = totalXpNextlevel - (100 * currentLevel * currentLevel)
+            //The total experience difference between your current level and the next level
+            int totalLevelDifference = totalXpNextlevel - (100 * currentLevel * currentLevel);
 
         }
         
         public int GetLevel() 
         {
-            int lvl = (int)(0.1f * Mathf.Sqrt(experience)
+            int lvl = (int)(0.1f * Mathf.Sqrt(experience));
             return lvl;
         }
 

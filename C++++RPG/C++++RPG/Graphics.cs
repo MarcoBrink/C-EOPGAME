@@ -3,22 +3,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace MyGame
+namespace C____RPG
 {
-    public static class Graphics : Game
+    class Graphics
     {
         private int tileSize;
         private int width;
         private int height;
-        
-        public static void load(ContentManager content)
-        {
-        }
 
-        public void Graphic(int gTile, int gWidth, int gHeight) {
+        public Graphics(int gTile, int gWidth, int gHeight) {
             tileSize = gTile;
             width = gWidth;
             height = gHeight;
+        }
+
+        public void draw() { 
+            
         }
     }
 }
