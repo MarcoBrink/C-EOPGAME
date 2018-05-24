@@ -1,3 +1,7 @@
+using Microsoft.Xna.Framework;
+using System;
+using System.Collections.Generic;
+
 namespace C____RPG
 {
     public class Player : Game
@@ -5,15 +9,23 @@ namespace C____RPG
         private string name;
         private int coins;
         private int playtime;
-        private Inventory inventory;
-		private dictionary<Skill> skills;
+        private int design;
+        //private Inventory inventory;
+		private List<Skill> skills;
         private Skill currentSkill;
-        private Location location;
-        private Story missions;
+        //private Location location;
+        //private Story missions;
 
-        public Player(string name)
+        public Player(string name, int design)
         {
             this.name = name;
+            this.design = design;
+            playtime = 0;
+
+            skills = new List<Skill>();
+            skills.Add(new Skill("fishing"));
+            skills.Add(new Skill("mining"));
+            skills.Add(new Skill("woodcutting"));
         }
 
         public void Act()
@@ -27,22 +39,25 @@ namespace C____RPG
             return coins;
         }
 
-        public dictionary<String, dynamic> GetStats()
+        public Dictionary<String, dynamic> GetStats()
         {
-            int coins = clock.GetHours();
-            int minutes = clock.GetMinutes();
-
             Dictionary<String, dynamic> dictionary = new Dictionary<String, dynamic>();
             dictionary.Add("coins", coins);
             dictionary.Add("playtime", playtime);
-            //dictionary.Add("miningxp", skills.);
-            dictionary.Add("woodcuttingxp", playtime);
-            dictionary.Add("fishingxp", playtime);
+
+            foreach(Skill skill in skills)
+            {
+                dictionary.Add(skill.GetName() + "xp", skill.GetXP()); // "mining" + "xp", 312312312
+                dictionary.Add(skill.GetName() + "lvl", skill.GetLevel()); // "fishing" + "lvl", 12
+            }            
 
             return dictionary;
         }
 
-
+        public int GetDesign()
+        {
+            return design;
+        }
 
 
     }

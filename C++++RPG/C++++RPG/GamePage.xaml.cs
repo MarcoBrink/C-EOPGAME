@@ -33,9 +33,7 @@ namespace C____RPG
 
 			// Create the game.
 			var launchArguments = string.Empty;
-            _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
-
-          
+            _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);        
 
         }
 
@@ -54,9 +52,17 @@ namespace C____RPG
 
         private void Start_Animation(object sender, RoutedEventArgs e)
         {
-            Blue_Circle_Animation.Duration = new Duration(new TimeSpan(5));
+            Blue_Circle_Animation.Duration = new Duration(new TimeSpan(0,1,0));
             Blue_Circle_Animation.From = new Point(200, 200);
-            Blue_Circle_Animation.To = new Point(400, 400);
+            Blue_Circle_Animation.To = new Point(800, 800);
+            Image_Animation.Duration = new Duration(new TimeSpan(0, 1, 0));
+            Image_Animation.From = new Point(100, 100);
+            Image_Animation.To = new Point(500, 400);
+
+
+
+            Test_but.Width = 200;
+            Test_but.Height = 200;
             myStoryboard.Begin();
             
             

@@ -1,3 +1,5 @@
+using Microsoft.Xna.Framework;
+
 namespace C____RPG
 {
     /* 
@@ -7,17 +9,19 @@ namespace C____RPG
     public class Settings : Game
     {
         public string language;
-        private bool mute;
-        private bool notification;
-        private bool sound;
+        private bool muted;
+        private bool notificationOn;
+        private bool soundOn;
+        private bool quit;
 
         // Create settings depending on the language.
         public Settings(string language)
         {
             this.language = language;
-            mute = false;
-            notification = true;
-            sound = true;
+            muted = false;
+            notificationOn = true;
+            soundOn = true;
+            quit = false;
         }
 
         // Get the language of the settings.
@@ -26,21 +30,57 @@ namespace C____RPG
             return language;
         }
 
-        //  Checks wheter the audio is muted.
-        public int GetMute()
+        //  Checks wheter the audio is muted or not.
+        public bool IsMuted()
         {
-
-            return mute;
+            return muted;
         }
 
-        public bool IsAchieved()
+        // Checks wheter receiving notifications is on or off.
+        public bool IsNotificationOn()
         {
-            return achieved;
+            return notificationOn;
         }
 
-        public void Achieve()
+        // Checks wheter the background sound of the game is on or off.
+        public bool IsSoundOn()
         {
-            achieved = true;
+            return soundOn;
+        }
+
+        // Checks wheter to quit the game.
+        public bool HasQuit()
+        {
+            return quit;
+        }
+
+        // function that toggles the value of booleans
+        private bool ToggleBool(bool boolean)
+        {
+            boolean = !boolean;
+            return boolean;
+        }
+
+        // Bunch of methods to toggle their boolean value.
+
+        public void ToggleMute()
+        {
+            muted = ToggleBool(muted);
+        }
+
+        public void ToggleNotification()
+        {
+            notificationOn = ToggleBool(notificationOn);
+        }
+
+        public void ToggleSound()
+        {
+            soundOn = ToggleBool(soundOn);
+        }
+
+        public void ToggleQuit()
+        {
+            quit = ToggleBool(quit);
         }
     }
 }

@@ -8,32 +8,41 @@
     mc:Ignorable="d">
 
     <SwapChainPanel x:Name="swapChainPanel" >
-        
-        <Canvas Width="auto" Height="auto">
-            <Canvas.Resources>
+
+		<Canvas Width="auto" Height="auto">
+		
+			<Canvas.Resources>
                 
                 <Storyboard x:Name="myStoryboard">
-
-                    <!-- Animate the center point of the ellipse from 100 X, 300 Y
-             to 400 X, 100 Y over 5 seconds. -->
                     <PointAnimation x:Name="Blue_Circle_Animation"
-             Storyboard.TargetProperty="Center"
-             Storyboard.TargetName="MyAnimatedEllipseGeometry"
+                          Storyboard.TargetProperty="Center"
+                          Storyboard.TargetName="MyAnimatedEllipseGeometry"
             
-             RepeatBehavior="Forever" EnableDependentAnimation="True"/>
+                          RepeatBehavior="1x"  EnableDependentAnimation="True"/>
 
                 </Storyboard>
-            </Canvas.Resources>
-            <Path Fill="Blue" Loaded="Start_Animation">
-                <Path.Data>
+                <Storyboard x:Name="ImageMovement">
+                    <PointAnimation x:Name="Image_Animation"
+                          Storyboard.TargetProperty="Center"
+                          Storyboard.TargetName="image_anim"
+            
+                          RepeatBehavior="1x"  EnableDependentAnimation="True"/>
 
-                    <!-- Describes an ellipse. -->
-                    <EllipseGeometry x:Name="MyAnimatedEllipseGeometry"
-             Center="200,100" RadiusX="55" RadiusY="55" />
-                </Path.Data>
-            </Path>
-            <Button Click="Start_Button_Click" Content="Button" Canvas.Left="118" Canvas.Top="349" Height="100" Width="225"/>
-        </Canvas>
+                </Storyboard>
+			</Canvas.Resources>
+      <Ellipse x:Name="image_anim"  Canvas.Top="200" Canvas.Left="200" Height="200" Width="300">
+        <Ellipse.Fill>
+          <ImageBrush ImageSource="StoreLogo.png" />
+        </Ellipse.Fill>
+      </Ellipse>
+			<Path Fill="Blue">
+
+				<Path.Data>
+                    <EllipseGeometry x:Name="MyAnimatedEllipseGeometry" Center="200,100" RadiusX="55" RadiusY="55" />
+				</Path.Data>
+			</Path>
+			<Button x:Name="Test_but" Click="Start_Animation" Content="Button" Canvas.Left="118" Canvas.Top="349" Height="100" Width="225"/>
+		</Canvas>
     </SwapChainPanel>
 
     
