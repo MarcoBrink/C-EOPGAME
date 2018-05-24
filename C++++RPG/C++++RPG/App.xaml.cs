@@ -20,6 +20,9 @@ using Windows.UI.Xaml.Navigation;
 
 namespace C____RPG
 {
+    //test_synchronozation
+    //st_synchronozation
+
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
@@ -42,7 +45,7 @@ namespace C____RPG
             //If running on the Xbox, disable the default on screen pointer
             if (IsXbox())
             {
-                Application.Current.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
+                //Application.Current.RequiresPointerMode = ApplicationRequiresPointerMode.WhenRequested;
             }
         }
     }

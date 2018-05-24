@@ -13,6 +13,9 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
+
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace C____RPG
@@ -23,14 +26,35 @@ namespace C____RPG
     public sealed partial class GamePage : Page
     {
 		readonly Game1 _game;
-
-		public GamePage()
+       
+        public GamePage()
         {
             this.InitializeComponent();
 
 			// Create the game.
 			var launchArguments = string.Empty;
             _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
+
+          
+
+        }
+
+        private void Start_Button_Click(object sender, RoutedEventArgs e)
+        {
+          
+    
+        }
+
+        private void movementEvent(Object state)
+        {
+
+            
+          
+        }
+
+        private void Start_Animation(object sender, RoutedEventArgs e)
+        {
+            myStoryboard.Begin();
         }
     }
 }

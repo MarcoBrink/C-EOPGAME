@@ -7,6 +7,37 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-  <SwapChainPanel x:Name="swapChainPanel" />
+    <SwapChainPanel x:Name="swapChainPanel" >
+        
+        <Canvas Width="auto" Height="auto">
+            <Canvas.Resources>
+                
+                <Storyboard x:Name="myStoryboard">
+
+                    <!-- Animate the center point of the ellipse from 100 X, 300 Y
+             to 400 X, 100 Y over 5 seconds. -->
+                    <PointAnimation
+             Storyboard.TargetProperty="Center"
+             Storyboard.TargetName="MyAnimatedEllipseGeometry"
+             Duration="0:0:5" 
+             From="100,300"
+             To="400,100"
+             RepeatBehavior="Forever" EnableDependentAnimation="True"/>
+
+                </Storyboard>
+            </Canvas.Resources>
+            <Path Fill="Blue" Loaded="Start_Animation">
+                <Path.Data>
+
+                    <!-- Describes an ellipse. -->
+                    <EllipseGeometry x:Name="MyAnimatedEllipseGeometry"
+             Center="200,100" RadiusX="55" RadiusY="55" />
+                </Path.Data>
+            </Path>
+            <Button Click="Start_Button_Click" Content="Button" Canvas.Left="118" Canvas.Top="349" Height="100" Width="225"/>
+        </Canvas>
+    </SwapChainPanel>
+
+    
 
 </Page>

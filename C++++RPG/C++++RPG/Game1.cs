@@ -10,11 +10,13 @@ namespace C____RPG
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Texture2D whiteRectangle;
 
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            IsMouseVisible = true;
         }
 
         /// <summary>
@@ -36,10 +38,12 @@ namespace C____RPG
         /// </summary>
         protected override void LoadContent()
         {
-            // Create a new SpriteBatch, which can be used to draw textures.
+            base.LoadContent();
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: use this.Content to load your game content here
+            // Create a 1px square rectangle texture that will be scaled to the
+            // desired size and tinted the desired color at draw time
+            whiteRectangle = new Texture2D(GraphicsDevice, 1, 1);
+            whiteRectangle.SetData(new[] { Color.White });
         }
 
         /// <summary>
@@ -48,7 +52,11 @@ namespace C____RPG
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            base.UnloadContent();
+            spriteBatch.Dispose();
+            // If you are creating your texture (instead of loading it with
+            // Content.Load) then you must Dispose of it
+            whiteRectangle.Dispose();
         }
 
         /// <summary>
@@ -59,7 +67,7 @@ namespace C____RPG
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-
+          
             base.Update(gameTime);
         }
 
@@ -69,11 +77,20 @@ namespace C____RPG
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Add your drawing code here
-
             base.Draw(gameTime);
+            GraphicsDevice.Clear(Color.White);
+            spriteBatch.Begin();
+
+            // Option One (if you have integer size and coordinates)
+            spriteBatch.Draw(whiteRectangle, new Rectangle(10, 20, 80, 30),
+                    Color.Chocolate);
+
+            // Option Two (if you have floating-point coordinates)
+            spriteBatch.Draw(whiteRectangle, new Vector2(10f, 20f), null,
+                    Color.Chocolate, 0f, Vector2.Zero, new Vector2(80f, 30f),
+                    SpriteEffects.None, 0f);
+
+            spriteBatch.End();
         }
     }
 }
