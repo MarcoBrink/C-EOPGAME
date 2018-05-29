@@ -1,53 +1,23 @@
-/*  
-    @author Marco Brink
-    @date   24-05-2018
- 
-*/
+
 
 using Microsoft.Xna.Framework;
 using System;
 
 namespace C____RPG
 {
-    public abstract class Item : Game
+    public abstract class Item
     {
-        private string name;
-        private string description;
-        private int value;
+        private string name { get; set; }
+        private string description { get; set; }
+        private int value { get; set; }
+        
 
 
         public Item(string name, string description, int value)
         {
             this.name = name;
             this.description = description;
-            this.value = value;
-            
-           
-        }
-
-        public string GetName() 
-        {
-            return name;
-        }
-
-        public string GetDescription() 
-        {
-            return description;
-        }
-
-        public void SetValue(int newValue) 
-        {
-            value = newValue;
-        }
-
-        public abstract int GetValue();
-       
-
-
-       
-
-
-
-
+            this.value = value;       
+        } 
     }
 }

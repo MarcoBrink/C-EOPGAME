@@ -22,5 +22,18 @@ namespace C____RPG
         {
 
         }
+
+        public void GetTools()
+        {
+            List<Item> itemList = new List<Item>();
+            foreach(Item item in items.Keys)
+            {
+                if(item is Tool)
+                {
+                    itemList.Add(item);
+                }
+            }
+            return itemList;
+        }
     }
 }

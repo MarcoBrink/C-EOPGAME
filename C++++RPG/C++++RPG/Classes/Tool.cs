@@ -1,8 +1,4 @@
-/*  
-    @author Marco Brink
-    @date   24-05-2018
- 
-*/
+
 
 using Microsoft.Xna.Framework;
 using System;
@@ -11,18 +7,13 @@ namespace C____RPG
 {
     public class Tool : Item
     {
-        private string name;
-        private string description;
-        private int price;
+        private int modifier { get; set;}
+        private int requiredLevel { get; set;}
 
-
-        public Tool(string name, string description, int price)
+        public Tool(string name, string description, int value, int modifier, int requiredLevel) : base(name, description, value)
         {
-            this.name = name;
-            this.description = description;
-            this.value = value;
+            this.modifier = modifier;
+            this.requiredLevel = requiredLevel;
         }
-
-        
     }
 }

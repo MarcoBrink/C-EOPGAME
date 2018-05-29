@@ -6,10 +6,10 @@ namespace C____RPG
 {
     public class Player : Game
     {
-        private string name;
-        private int coins;
+        public string name { get; set; }
+        private int coins { get; set; }
         private int playtime;
-        private int design;
+        private int sprite;
         //private Inventory inventory;
 		private List<Skill> skills;
         private Skill currentSkill;
@@ -28,9 +28,50 @@ namespace C____RPG
             skills.Add(new Skill("woodcutting"));
         }
 
-        public void Act()
+        public void Act(int basexp, String skillname)
         {
             // Alles wat gedaan moet worden
+            foreach (Skill skill in skills)
+            {
+                if(skill.Name == skillname)
+                {
+                    currentSkill = skill;
+                }
+                else
+                {
+                    currentSkill = null;
+                }
+            }
+
+            if(currentSkill == null)
+            {
+                // idle
+            }
+            else
+            {
+                
+                List<Item> tools = inventory.GetTools();
+
+                if (currentSkill.Name == "woodcutting")
+                {
+                    foreach (Item item in tools)
+                    {
+                        if(item.Skillname == "woodcutting")
+                        {
+                            currentSkill item.modifier * source.Experience
+                        }
+                    }
+                }
+                else if (currentSkill.Name == "mining")
+                {
+
+                }
+                else if (currentSkill.Name == "fishing")
+                {
+
+                }
+                currentSkill.IncreaseXP();
+            }
         }
 
         public int ChangeCoins(int amount)
@@ -54,9 +95,9 @@ namespace C____RPG
             return dictionary;
         }
 
-        public int GetDesign()
+        public int GetSprite()
         {
-            return design;
+            return sprite;
         }
 
 
