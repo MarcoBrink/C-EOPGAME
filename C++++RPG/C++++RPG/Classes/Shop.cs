@@ -8,12 +8,18 @@ namespace C____RPG
         private String name;
         private List<Item> items;
         private Location location;
-
+        z
 
 
         public Shop()
         {
-            
+            items.add()
+            items.add()
+            items.add()
+            items.add()
+            items.add()
+            items.add()
+            items.add()
         }
         
         public List<Item> GetItems()

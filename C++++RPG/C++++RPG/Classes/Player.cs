@@ -52,8 +52,7 @@ namespace C____RPG
                 
                 List<Item> tools = inventory.GetTools();
 
-                if (currentSkill.Name == "woodcutting")
-                {
+                
                     foreach (Item item in tools)
                     {
                         if(item.Skillname == "woodcutting")
@@ -61,15 +60,7 @@ namespace C____RPG
                             currentSkill item.modifier * source.Experience
                         }
                     }
-                }
-                else if (currentSkill.Name == "mining")
-                {
-
-                }
-                else if (currentSkill.Name == "fishing")
-                {
-
-                }
+               
                 currentSkill.IncreaseXP();
             }
         }
