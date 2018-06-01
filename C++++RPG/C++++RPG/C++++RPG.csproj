@@ -122,12 +122,15 @@
     <None Include="C++++RPG_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\tiles\tile1.png" />
     <Content Include="Content\tiles\tile12.png" />
     <Content Include="Content\tiles\tile13.png" />
     <Content Include="Content\tiles\tile14.png" />
     <Content Include="Content\tiles\tile15.png" />
     <Content Include="Content\tiles\tile16.png" />
+    <Content Include="Content\tiles\tile17.png" />
     <Content Include="Content\tiles\tile19.png" />
+    <Content Include="Content\tiles\tile20.png" />
     <Content Include="Content\tiles\tile23.png" />
     <Content Include="Content\tiles\tile27.png" />
     <Content Include="Content\tiles\tile29.png" />
