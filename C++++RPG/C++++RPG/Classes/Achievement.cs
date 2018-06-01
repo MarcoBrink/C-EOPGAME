@@ -25,7 +25,7 @@ namespace C____RPG
         }
         
         // Get a description of the achievement
-        public string GetDescription()
+        public string GetDescription() { 
         
             return description;
         }
