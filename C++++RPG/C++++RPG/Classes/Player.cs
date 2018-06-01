@@ -10,6 +10,7 @@ namespace C____RPG
         private int coins { get; set; }
         private int playtime;
         private int sprite;
+        private int design;
         //private Inventory inventory;
 		private List<Skill> skills;
         private Skill currentSkill;
@@ -33,6 +34,7 @@ namespace C____RPG
             // Alles wat gedaan moet worden
             foreach (Skill skill in skills)
             {
+                /*
                 if(skill.Name == skillname)
                 {
                     currentSkill = skill;
@@ -40,7 +42,7 @@ namespace C____RPG
                 else
                 {
                     currentSkill = null;
-                }
+                }*/
             }
 
             if(currentSkill == null)
@@ -49,7 +51,7 @@ namespace C____RPG
             }
             else
             {
-                
+             /*   
                 List<Item> tools = inventory.GetTools();
 
                 
@@ -57,11 +59,12 @@ namespace C____RPG
                     {
                         if(item.Skillname == "woodcutting")
                         {
-                            currentSkill item.modifier * source.Experience
+                            currentSkill = item.modifier * source.Experience;
                         }
                     }
                
                 currentSkill.IncreaseXP();
+                */
             }
         }
 

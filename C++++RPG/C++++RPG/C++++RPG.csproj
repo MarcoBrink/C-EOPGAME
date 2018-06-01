@@ -108,8 +108,9 @@
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
-    <Compile Include="Graphics.cs" />
+    <Compile Include="Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
@@ -121,17 +122,27 @@
     <None Include="C++++RPG_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\tiles\dirt.png" />
-    <Content Include="Content\tiles\dirtAll.png" />
-    <Content Include="Content\tiles\flowerBlue.png" />
-    <Content Include="Content\tiles\flowerPurple.png" />
-    <Content Include="Content\tiles\flowerRed.png" />
-    <Content Include="Content\tiles\grass.png" />
-    <Content Include="Content\tiles\grassAll.png" />
-    <Content Include="Content\tiles\gravestone.png" />
-    <Content Include="Content\tiles\pebble.png" />
-    <Content Include="Content\tiles\stone.png" />
-    <Content Include="Content\tiles\water.png" />
+    <Content Include="Content\tiles\tile12.png" />
+    <Content Include="Content\tiles\tile13.png" />
+    <Content Include="Content\tiles\tile14.png" />
+    <Content Include="Content\tiles\tile15.png" />
+    <Content Include="Content\tiles\tile16.png" />
+    <Content Include="Content\tiles\tile19.png" />
+    <Content Include="Content\tiles\tile23.png" />
+    <Content Include="Content\tiles\tile27.png" />
+    <Content Include="Content\tiles\tile29.png" />
+    <Content Include="Content\tiles\tile30.png" />
+    <Content Include="Content\tiles\tile32.png" />
+    <Content Include="Content\tiles\tile34.png" />
+    <Content Include="Content\tiles\tile36.png" />
+    <Content Include="Content\tiles\tile37.png" />
+    <Content Include="Content\tiles\tile39.png" />
+    <Content Include="Content\tiles\tile4.png" />
+    <Content Include="Content\tiles\tile40.png" />
+    <Content Include="Content\tiles\tile6.png" />
+    <Content Include="Content\tiles\tile7.png" />
+    <Content Include="Content\tiles\tile8.png" />
+    <Content Include="Content\tiles\tile9.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
