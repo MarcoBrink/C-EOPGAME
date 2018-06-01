@@ -51,7 +51,7 @@ namespace C____RPG
             totalFrames = texture.Height / height;
 
             //Draw a big picture
-            if (texture.Height > height && texture.Width > height)
+            if (texture.Height > height && texture.Width > height && texture.Height == texture.Width)
             {
                 rectangle.Y = (rectangle.Y - texture.Height) + height;
                 rectangle.Height = texture.Height;
@@ -60,6 +60,19 @@ namespace C____RPG
                 sb.Draw(texture,
                     rectangle,
                     new Rectangle(0, texture.Height, texture.Width, texture.Height),
+                    Color.White
+                );
+            }
+            //Draw a BIG animated sprite
+            else if (texture.Height > height && texture.Width > height)
+            {
+                rectangle.Y -= height;
+                rectangle.Height = texture.Width;
+                rectangle.Width = texture.Width;
+
+                sb.Draw(texture,
+                    rectangle,
+                    new Rectangle(0, (currentFrame * texture.Height), texture.Width, texture.Height),
                     Color.White
                 );
             }
