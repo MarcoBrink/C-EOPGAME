@@ -11,19 +11,21 @@ namespace C____RPG
         private String description;
         private int reward;
         private bool finished;
-        private bool started;
+        private bool started { get; set; }
+        public enum Mode { easy, normal, hard };
+        private Mode mode;
+        
 
-
-        public Mission(String name, String description, int reward)
+        public Mission(String name, String description, int reward, Mode mode)
         {
             this.name = name;
             this.description = description;
             this.mode = mode;
             this.reward = reward;
-            this.started = started;
+            this.started = false;
         }
 
-        public abstract bool SetFinished()
+        public bool SetFinished()
         {
             if (finished = false)
             {
@@ -51,5 +53,11 @@ namespace C____RPG
         {
             return finished;
         }
+
+        public MainMission GetNextMission()
+        {
+            return null;
+        }
+
     }
 }

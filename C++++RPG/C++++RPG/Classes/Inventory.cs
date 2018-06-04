@@ -23,7 +23,7 @@ namespace C____RPG
 
         }
 
-        public void GetTools()
+        public List<Item> GetTools()
         {
             List<Item> itemList = new List<Item>();
             foreach(Item item in items.Keys)

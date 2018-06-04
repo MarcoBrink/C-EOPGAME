@@ -13,7 +13,7 @@ namespace C____RPG
         private Dictionary<String, Source> sources { get; }
         private List<Item> items;
         private List<Achievement> achievements;
-        private Save save { get; }
+        //private Save save { get; }
 
         public Gamerino()
         {

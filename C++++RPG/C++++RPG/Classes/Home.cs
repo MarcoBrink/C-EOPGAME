@@ -14,7 +14,7 @@ namespace C____RPG
 
         public Home(string name, int x, int y)
         {
-            this.name = name;
+            this.Name = name;
             Rent = 500;
             tier = 1;
             Location = new Location(x, y);
@@ -23,7 +23,7 @@ namespace C____RPG
 
         public void Upgrade()
         {
-            Tier += 1;
+            tier += 1;
         }
         
     }

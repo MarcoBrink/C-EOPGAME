@@ -11,7 +11,7 @@ namespace C____RPG
         private MainMission nextMission { get; } 
 
 
-        public MainMission(String name, String description, int reward, int levelRequired, MainMission nextMission) : base(name,description,reward)
+        public MainMission(String name, String description, int reward, int levelRequired, MainMission nextMission, Mode mode) : base(name,description,reward, mode)
         {
             this.levelRequired = levelRequired;
             this.nextMission = nextMission;       
