@@ -1,6 +1,7 @@
 
 using Microsoft.Xna.Framework;
 using System;
+using System.Diagnostics;
 
 namespace C____RPG
 {
@@ -11,7 +12,7 @@ namespace C____RPG
         private int streak { get; set; }
         private int ratio { get; set; }      
         private DateTime timeStarted { get; }
-        private DateTime timeLeft
+        private double timeLeft
         {
             get
             {
@@ -28,16 +29,16 @@ namespace C____RPG
         {
             if ((DateTime.Now - timeStarted).TotalDays < 1)
             {
-                base.setFinished();
+                //base.SetFinished();
+                Debug.WriteLine("Mission Started");
                 return true;
-                Console.WriteLine("Mission Started");
 
             }
             else
             {
                 //The daily mission has expired 
+                Debug.WriteLine("Mission Expired");
                 return false;
-                Console.WriteLine("Mission Expired");
             }
         }
     }
