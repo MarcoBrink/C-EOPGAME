@@ -6,6 +6,7 @@
 
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace C____RPG
 {
@@ -23,7 +24,7 @@ namespace C____RPG
 
         public DailyMission GetDailyMission()
         {
-            
+            return null;
         }
 
         public MainMission GetCurrentMission()
@@ -31,7 +32,7 @@ namespace C____RPG
             return currentMission; 
         }
 
-        public bool NextMainMission(mainMission CurrentMission)
+        public bool NextMainMission(MainMission CurrentMission)
         {
             if (CurrentMission.IsFinished())
             {

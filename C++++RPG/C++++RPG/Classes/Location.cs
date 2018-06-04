@@ -1,4 +1,5 @@
 using Microsoft.Xna.Framework;
+using System;
 
 namespace C____RPG
 {
@@ -14,7 +15,7 @@ namespace C____RPG
         {
             this.x = x;
             this.y = y;
-            position = Tuple.Create<x, y>;
+            position = Tuple.Create<int, int>(x,y);
         }
 
         //Get the location as a tuple of x and y

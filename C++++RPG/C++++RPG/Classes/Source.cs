@@ -3,7 +3,7 @@ using System;
 
 namespace C____RPG
 {
-    public class Source : Item
+    public class Source
     {
 
         private String Name { get; }
@@ -12,8 +12,9 @@ namespace C____RPG
         private Resource resource;
 
 
-        public Source(Resource resource, int experience , int x, int y)
+        public Source(String name, Resource resource, int experience , int x, int y)
         {
+            Name = name;
             Location = new Location(x,y);
             this.resource = resource;
             Experience = experience;

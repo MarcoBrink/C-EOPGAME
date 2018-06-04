@@ -20,18 +20,19 @@ namespace C____RPG
             }
         }
 
-        public DailyMission(String name, String description, int reward, DateTime timeStarted) : base(name,description,reward)
+        public DailyMission(String name, String description, int reward, DateTime timeStarted, Mode mode) : base(name,description,reward, mode)
         {
             this.timeStarted = timeStarted;
         }
 
-        public override bool SetFinished()
+        public bool SetFinished()
         {
             if ((DateTime.Now - timeStarted).TotalDays < 1)
             {
                 //base.SetFinished();
                 Debug.WriteLine("Mission Started");
                 return true;
+                
 
             }
             else
