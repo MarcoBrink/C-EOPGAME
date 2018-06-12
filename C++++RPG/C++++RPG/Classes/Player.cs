@@ -16,11 +16,14 @@ namespace C____RPG
         private Skill currentSkill;
         //private Location location;
         //private Story missions;
+        private int exp;
+        private int[] level = { 0, 1, 2, 3, 4, 5 };
 
         public Player(string name, int design)
         {
             this.name = name;
             this.design = design;
+            exp = 2;    
             playtime = 0;
 
             skills = new List<Skill>();
@@ -94,6 +97,33 @@ namespace C____RPG
             return sprite;
         }
 
+        public double getHouse() {
+            if (exp == level[0])
+                return 41;
+            else if (exp == level[1])
+                return 46;
+            else if (exp == level[2])
+                return 47;
+            else if (exp == level[3])
+                return 39;
+            else if (exp == level[4])
+                return 48;
+            return 0;
+        }
+
+        public double getPathing(string side)
+        {
+            if (exp <= level[2])
+                if (side == "LL")
+                    return 44;
+                else if (side == "RL")
+                    return 45;
+                else if (side == "up")
+                    return 42;
+                else if (side == "sideways")
+                    return 43;
+            return 40;
+        }
 
     }
 }
