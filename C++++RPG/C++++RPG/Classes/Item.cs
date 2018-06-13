@@ -2,14 +2,15 @@
 
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections.Generic;
 
 namespace C____RPG
 {
     public abstract class Item
     {
-        private string name { get; set; }
-        private string description { get; set; }
-        private int value { get; set; }
+        private string name;
+        private string description;
+        private int value;
         
 
 
@@ -18,6 +19,21 @@ namespace C____RPG
             this.name = name;
             this.description = description;
             this.value = value;       
-        } 
+        }
+
+        public string GetName()
+        {
+            return name;
+        }
+
+        public Dictionary<String, dynamic> GetItemDetails()
+        {
+            Dictionary<String, dynamic> itemdetails = new Dictionary<String, dynamic>();
+            itemdetails.Add("name", name);
+            itemdetails.Add("description", description);
+            itemdetails.Add("value", value);
+
+            return itemdetails;
+        }
     }
 }
