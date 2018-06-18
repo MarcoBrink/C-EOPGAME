@@ -1,5 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Audio;
+using Microsoft.Xna.Framework.Media;
+using System.Diagnostics;
+using System.Threading;
+using System.Collections.Generic;
+using Windows.Media.Core;
+
+
+using System;
 
 namespace C____RPG
 {
@@ -11,14 +21,40 @@ namespace C____RPG
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Map map;
-        Player player = new Player("Michael Jordan", 1);
+        private Dictionary<string, Source> sources;
+        private Player player1 = new Player("player1", 1);
+        Song song;
+        Dictionary<string, SoundEffect> audios;
+        SoundEffectInstance instance = null;
 
         public Game1()
         {
+
+           
+
+            sources = new Dictionary<string, Source>();
+            Item wood = new Resource("wood", "Wood comes from a tree", 5);
+            Item  ore = new Resource("wood", "looks valuable", 5);
+            Item fish = new Resource("fish", "fish! you can eat this", 5);
+
+            Source woodcutting = new Source("Woodcutting", null, 25, 100, 100);
+            Source minining = new Source("mining", ore, 25, 100, 100);
+            Source fishing = new Source("fishing", fish, 25, 100, 100);
+
+            sources.Add("woodcutting", woodcutting);
+            sources.Add("mining", minining);
+            sources.Add("fishing", fishing);
+
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             IsMouseVisible = true;
+
+            
+
+            
         }
+
+
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -31,6 +67,7 @@ namespace C____RPG
             // TODO: Add your initialization logic here
 
             base.Initialize();
+
         }
 
         /// <summary>
@@ -39,6 +76,20 @@ namespace C____RPG
         /// </summary>
         protected override void LoadContent()
         {
+
+            //audio--------------------------------------------
+
+            audios = new Dictionary<string, SoundEffect>();
+            //audios.Add("fishing", Content.Load<SoundEffect>("ak47"));
+            
+            audios.Add("fishing", Content.Load<SoundEffect>("Audio/water"));
+            audios.Add("mining", Content.Load<SoundEffect>("Audio/mining"));
+            audios.Add("woodcutting", Content.Load<SoundEffect>("Audio/woodcutting"));
+
+            this.song = Content.Load<Song>("Audio/main");
+            MediaPlayer.Play(song);
+            MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
+
             map = new Map();
             base.LoadContent();
             spriteBatch = new SpriteBatch(GraphicsDevice);
@@ -116,13 +167,13 @@ namespace C____RPG
 {0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,40,40,40,40,0,0,0,40,40,40,40,},
 {0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,40,40,40,40,40,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,player.getPathing("up"),0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player.getPathing("LL"),player.getPathing("sideways"),player.getPathing("sideways"),player.getPathing("sideways"),player.getPathing("sideways"),player.getPathing("sideways"),player.getPathing("RL"),0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("LL"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("RL"),0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
              };
@@ -147,13 +198,14 @@ namespace C____RPG
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,player.getHouse(),0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,player1.getHouse(),0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0},
              };
         map.Generate(resources, 32);
+
         }
 
     /// <summary>
@@ -174,9 +226,10 @@ namespace C____RPG
         protected override void Update(GameTime gameTime)
         {
             // TODO: Add your update logic here
-          
+            
             base.Update(gameTime);
         }
+
 
         /// <summary>
         /// This is called when the game should draw itself.
@@ -191,5 +244,48 @@ namespace C____RPG
             map.Draw(spriteBatch);
             spriteBatch.End();
         }
+
+        void MediaPlayer_MediaStateChanged(object sender, System.
+                                           EventArgs e)
+        {
+            // 0.0f is silent, 1.0f is full volume
+            MediaPlayer.Volume -= 0.1f;
+            MediaPlayer.Play(song);
+        }
+
+        public Player GetPlayer()
+        {
+            return player1;
+        }
+
+        public Dictionary<string, Source> getSources()
+        {
+            return sources;
+        }
+
+        public void playSound(String soundname)
+        {
+            
+            foreach (var sound in audios)
+            {
+                if (sound.Key == soundname)
+                {
+                    instance = sound.Value.CreateInstance();
+                }
+            }
+           
+            instance.IsLooped = true;
+            instance.Play();
+        }
+
+        public void stopSound()
+        {
+            if (instance != null)
+            {
+                instance.Stop();
+            }
+            
+        }
+
     }
 }

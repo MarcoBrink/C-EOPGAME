@@ -101,6 +101,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Classes\Achievement.cs" />
+    <Compile Include="Classes\Animation.cs" />
     <Compile Include="Classes\DailyMission.cs" />
     <Compile Include="Classes\Gamerino.cs" />
     <Compile Include="Classes\Home.cs" />
@@ -135,37 +136,42 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\tiles\player\down.gif" />
-    <Content Include="Content\tiles\player\down1.png" />
-    <Content Include="Content\tiles\player\down2.png" />
-    <Content Include="Content\tiles\player\down3.png" />
-    <Content Include="Content\tiles\player\fishing.gif" />
-    <Content Include="Content\tiles\player\fishing1.png" />
-    <Content Include="Content\tiles\player\fishing2.png" />
-    <Content Include="Content\tiles\player\fishing3.png" />
-    <Content Include="Content\tiles\player\fishing4.png" />
-    <Content Include="Content\tiles\player\left.gif" />
-    <Content Include="Content\tiles\player\left1.png" />
-    <Content Include="Content\tiles\player\left2.png" />
-    <Content Include="Content\tiles\player\left3.png" />
-    <Content Include="Content\tiles\player\mine.gif" />
-    <Content Include="Content\tiles\player\mine1.png" />
-    <Content Include="Content\tiles\player\mine2.png" />
-    <Content Include="Content\tiles\player\right.gif" />
-    <Content Include="Content\tiles\player\right1.png" />
-    <Content Include="Content\tiles\player\right2.png" />
-    <Content Include="Content\tiles\player\right3.png" />
-    <Content Include="Content\tiles\player\up.gif" />
-    <Content Include="Content\tiles\player\up1.png" />
-    <Content Include="Content\tiles\player\up2.png" />
-    <Content Include="Content\tiles\player\up3.png" />
-    <Content Include="Content\tiles\player\walk1.png" />
-    <Content Include="Content\tiles\player\walk2.png" />
-    <Content Include="Content\tiles\player\walk3.png" />
-    <Content Include="Content\tiles\player\walk4.png" />
-    <Content Include="Content\tiles\player\woodcutting.gif" />
-    <Content Include="Content\tiles\player\woodcutting1.png" />
-    <Content Include="Content\tiles\player\woodcutting2.png" />
+    <Content Include="Content\Audio\main.mp3" />
+    <Content Include="Content\Audio\mining.wav" />
+    <Content Include="Content\Audio\water.wav" />
+    <Content Include="Content\Audio\woodcutting.wav" />
+    <Content Include="Content\Player\down.gif" />
+    <Content Include="Content\Player\down1.png" />
+    <Content Include="Content\Player\down2.png" />
+    <Content Include="Content\Player\down3.png" />
+    <Content Include="Content\Player\fishing.gif" />
+    <Content Include="Content\Player\fishing1.png" />
+    <Content Include="Content\Player\fishing2.png" />
+    <Content Include="Content\Player\fishing3.png" />
+    <Content Include="Content\Player\fishing4.png" />
+    <Content Include="Content\Player\left.gif" />
+    <Content Include="Content\Player\left1.png" />
+    <Content Include="Content\Player\left2.png" />
+    <Content Include="Content\Player\left3.png" />
+    <Content Include="Content\Player\mine.gif" />
+    <Content Include="Content\Player\mine1.png" />
+    <Content Include="Content\Player\mine2.png" />
+    <Content Include="Content\Player\right.gif" />
+    <Content Include="Content\Player\right1.png" />
+    <Content Include="Content\Player\right2.png" />
+    <Content Include="Content\Player\right3.png" />
+    <Content Include="Content\Player\tile1.png" />
+    <Content Include="Content\Player\up.gif" />
+    <Content Include="Content\Player\up1.png" />
+    <Content Include="Content\Player\up2.png" />
+    <Content Include="Content\Player\up3.png" />
+    <Content Include="Content\Player\walk1.png" />
+    <Content Include="Content\Player\walk2.png" />
+    <Content Include="Content\Player\walk3.png" />
+    <Content Include="Content\Player\walk4.png" />
+    <Content Include="Content\Player\woodcutting.gif" />
+    <Content Include="Content\Player\woodcutting1.png" />
+    <Content Include="Content\Player\woodcutting2.png" />
     <Content Include="Content\tiles\resources\coin bag.png" />
     <Content Include="Content\tiles\resources\coin.png" />
     <Content Include="Content\tiles\resources\fish.png" />
@@ -235,12 +241,15 @@
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

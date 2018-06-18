@@ -14,7 +14,7 @@ namespace C____RPG
         //private Inventory inventory;
 		private List<Skill> skills;
         private Skill currentSkill;
-        //private Location location;
+        private Location location;
         //private Story missions;
         private int exp;
         private int[] level = { 0, 1, 2, 3, 4, 5 };
@@ -25,6 +25,8 @@ namespace C____RPG
             this.design = design;
             exp = 2;    
             playtime = 0;
+
+            location = new Location(868,475);
 
             skills = new List<Skill>();
             skills.Add(new Skill("fishing"));
@@ -96,7 +98,7 @@ namespace C____RPG
         {
             return sprite;
         }
-
+        
         public double getHouse() {
             if (exp == level[0])
                 return 41;
@@ -123,6 +125,11 @@ namespace C____RPG
                 else if (side == "sideways")
                     return 43;
             return 40;
+        }
+
+        public Location getLocation()
+        {
+            return location;
         }
 
     }

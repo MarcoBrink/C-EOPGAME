@@ -1,7 +1,8 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "6.1.5",
-    "MonoGame.Extended": "1.1.0"
+    "MonoGame.Extended": "1.1.0",
+    "XamlAnimatedGif": "1.1.10"
   },
   "frameworks": {
     "uap10.0.10240": {}
