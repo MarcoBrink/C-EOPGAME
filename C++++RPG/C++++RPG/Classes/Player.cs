@@ -14,7 +14,7 @@ namespace C____RPG
         //private Inventory inventory;
 		private List<Skill> skills;
         private Skill currentSkill;
-        //private Location location;
+        private Location location;
         //private Story missions;
 
         public Player(string name, int design)
@@ -22,6 +22,8 @@ namespace C____RPG
             this.name = name;
             this.design = design;
             playtime = 0;
+
+            location = new Location(868,475);
 
             skills = new List<Skill>();
             skills.Add(new Skill("fishing"));
@@ -94,6 +96,10 @@ namespace C____RPG
             return sprite;
         }
 
+        public Location getLocation()
+        {
+            return location;
+        }
 
     }
 }
