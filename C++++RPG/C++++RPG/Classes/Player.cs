@@ -1,6 +1,7 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace C____RPG
 {
@@ -8,7 +9,9 @@ namespace C____RPG
     {
         public string name { get; set; }
         private int coins { get; set; }
-        private int playtime;
+        private int totalcoinsearned;
+        private int totalplaytime;
+        private int sessionplaytime;
         private int sprite;
         private int design;
         private Inventory inventory;
@@ -16,17 +19,22 @@ namespace C____RPG
         private Skill currentSkill;
         //private Location location;
         //private Story missions;
+        private Stopwatch stopwatch;
 
         public Player(string name, int design)
         {
             this.name = name;
             this.design = design;
-            playtime = 0;
+            totalplaytime = 0;
+            sessionplaytime = 0;
 
             skills = new List<Skill>();
             skills.Add(new Skill("fishing"));
             skills.Add(new Skill("mining"));
             skills.Add(new Skill("woodcutting"));
+
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
         }
 
         public int Act(int basexp, Item resource)
@@ -79,6 +87,12 @@ namespace C____RPG
         {
             // Increase or decrease the amount of coins depending on the parameter
             coins = coins + amount;
+
+            // Add all positive amounts to totalcoinsearned
+            if(amount > 0)
+            {
+                totalcoinsearned = totalcoinsearned + amount;
+            }
             return coins;
         }
 
@@ -89,7 +103,14 @@ namespace C____RPG
             Dictionary<String, dynamic> dictionary = new Dictionary<String, dynamic>();
             dictionary.Add("name", name);
             dictionary.Add("coins", coins);
-            dictionary.Add("playtime", playtime);
+            dictionary.Add("totalearned", totalcoinsearned);
+
+            stopwatch.Stop();
+            sessionplaytime = Convert.ToInt32(stopwatch.ElapsedMilliseconds) / 1000;
+            stopwatch.Start();
+
+            dictionary.Add("totalplaytime", totalplaytime + sessionplaytime);
+            dictionary.Add("sessionplaytime", sessionplaytime);
 
             // Add all the xp and levels to the dictionary
             foreach(Skill skill in skills)
