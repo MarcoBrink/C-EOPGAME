@@ -66,6 +66,7 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
+            
 
             <TextBlock x:Name="xp_gain_textblock" Canvas.Left="547" Visibility="Collapsed" TextWrapping="Wrap" Text="30xp" Canvas.Top="246"/>
 
@@ -74,6 +75,16 @@
             <Button x:Name="fishing" Background="Transparent" Click="Fishing" Content="" BorderThickness="0" Canvas.Top="405" Height="212" Width="453" Opacity="0.01"/>
             <Button Background="Transparent" Click="Home" Content="" BorderThickness="0" Canvas.Left="803" Canvas.Top="313" Height="171" Width="162" Opacity="0.01"/>
 
+        </Canvas>
+
+        <!-- Startscherm   -->
+        <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="990" VerticalAlignment="Top" Width="1490" Fill="Black"/>
+        <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#a67c52">
+            <Button Content="START" Canvas.Left="224" Canvas.Top="299" Click="Button_Click_1" Background="#33E2E2E2" BorderBrush="Black" BorderThickness="1,1,1,1"   />
+            <TextBox Name="CharNameTB" Canvas.Left="158" TextWrapping="Wrap" Text="" Canvas.Top="48" Width="181" TextAlignment="Center" InputScope="Text" PlaceholderText="Name"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Create your character" Canvas.Top="19" Width="475" FontWeight="Bold" FontSize="18" TextAlignment="Center"/>
+            <Rectangle Fill="#FFE4C8B0" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
+            <Image Source="Assets/player.png" Canvas.Left="199" Canvas.Top="105" Height="173" Width="105"/>
         </Canvas>
 
     </SwapChainPanel>

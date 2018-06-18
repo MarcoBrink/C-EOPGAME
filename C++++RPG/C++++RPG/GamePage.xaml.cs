@@ -390,6 +390,11 @@ namespace C____RPG
 
         }
 
-
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            newGame.Visibility = Visibility.Collapsed;
+            gameOverlay.Visibility = Visibility.Collapsed;
+            var Name = CharNameTB.Text;
+        }
     }
 }
