@@ -395,6 +395,7 @@ namespace C____RPG
             newGame.Visibility = Visibility.Collapsed;
             gameOverlay.Visibility = Visibility.Collapsed;
             var Name = CharNameTB.Text;
+            Save save = new Save(Name);
         }
     }
 }
