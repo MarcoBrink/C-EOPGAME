@@ -11,11 +11,13 @@
 
     <SwapChainPanel x:Name="swapChainPanel" Width="1280" Height="840" VerticalAlignment="Top" HorizontalAlignment="Left">
         <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="990" VerticalAlignment="Top" Width="1490" Fill="Black"/>
-        <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#a67c52">
-            <Button Content="START" Canvas.Left="224" Canvas.Top="299" Click="Start_game" Background="#33E2E2E2" BorderBrush="Black" BorderThickness="1,1,1,1"   />
-            <TextBox Name="CharNameTB" Canvas.Left="158" TextWrapping="Wrap" Text="" Canvas.Top="48" Width="181" TextAlignment="Center" InputScope="Text" PlaceholderText="Name"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Create your character" Canvas.Top="19" Width="475" FontWeight="Bold" FontSize="18" TextAlignment="Center"/>
-            <Rectangle Fill="#FFE4C8B0" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
+        <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#FFF9F9F9" Margin="281,104,504,380">
+            <Button Content="START" Canvas.Left="218" Canvas.Top="310" Click="Start_game" Background="#33000000" BorderBrush="Black" BorderThickness="1,1,1,1" FontFamily="Segoe UI Semibold" FontWeight="Bold"   />
+            <TextBox Name="CharNameTB"  Canvas.Left="158" TextWrapping="Wrap" Text="" Canvas.Top="48" Width="181" TextAlignment="Center" InputScope="Text" PlaceholderText="Name" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" FontSize="21" Background="#FF777777"/>
+            <StackPanel Height="43" Width="495" Background="#FF34495E">
+                <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Create your character" Canvas.Top="19" Width="475" FontSize="24" TextAlignment="Center" Foreground="White" FontFamily="Showcard Gothic"/>
+            </StackPanel>
+            <Rectangle Fill="#FFE8E8E8" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
             <Image Source="Content/Player/down1.png" Canvas.Left="199" Canvas.Top="105" Height="173" Width="105"/>
         </Canvas>
         <Canvas Width="1280" Height="840" VerticalAlignment="Top" HorizontalAlignment="Left" KeyDown="GeneralKeyDown" >
@@ -62,7 +64,7 @@
 
                 </Storyboard>
             </Canvas.Resources>
-            <Image x:Name="player_sprite" gif:AnimationBehavior.SourceUri="Content/Player/down.gif" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" Canvas.Left="868" Canvas.Top="475" NineGrid="0" AutomationProperties.AccessibilityView="Content">
+            <Image x:Name="player_sprite" Visibility="Collapsed"  gif:AnimationBehavior.SourceUri="Content/Player/down.gif" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" Canvas.Left="868" Canvas.Top="475" NineGrid="0" AutomationProperties.AccessibilityView="Content">
 
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -76,10 +78,10 @@
 
             <TextBlock x:Name="xp_gain_textblock" Canvas.Left="547" Visibility="Collapsed" TextWrapping="Wrap" Text="" Canvas.Top="246"/>
 
-            <Button x:Name="mining" Background="#FF525252" Click="Mining" Content="" BorderThickness="0" Canvas.Left="607" Height="230" Width="404" Opacity="0.01"/>
-            <Button x:Name="woodcutting" Background="Transparent" Click="Woodcutting" Content="" BorderThickness="0" Height="272" Width="480" Opacity="0.01"/>
-            <Button x:Name="fishing" Background="Transparent" Click="Fishing" Content="" BorderThickness="0" Canvas.Top="405" Height="212" Width="453" Opacity="0.01"/>
-            <Button x:Name="home_button" Background="Transparent" Click="Home" Content="" BorderThickness="0" Canvas.Left="803" Canvas.Top="313" Height="171" Width="162" Opacity="0.01"/>
+            <Button x:Name="mining" Visibility="Collapsed"  Background="#FF525252" Click="Mining" Content="" BorderThickness="0" Canvas.Left="607" Height="230" Width="404" Opacity="0.01"/>
+            <Button x:Name="woodcutting" Visibility="Collapsed"  Background="Transparent" Click="Woodcutting" Content="" BorderThickness="0" Height="272" Width="480" Opacity="0.01"/>
+            <Button x:Name="fishing" Visibility="Collapsed"  Background="Transparent" Click="Fishing" Content="" BorderThickness="0" Canvas.Top="405" Height="212" Width="453" Opacity="0.01"/>
+            <Button x:Name="home_button" Visibility="Collapsed" Background="Transparent" Click="Home" Content="" BorderThickness="0" Canvas.Left="803" Canvas.Top="313" Height="171" Width="162" Opacity="0.01"/>
             <RelativePanel Canvas.Left="805" Canvas.Top="540">
                 <StackPanel x:Name="stats" Orientation="Horizontal" Width="218" Height="48" Background="#FF607285" Opacity="0.8" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
 
@@ -104,7 +106,7 @@
                 </StackPanel>
 
             </RelativePanel>
-            
+
             <RelativePanel x:Name="Misson_panel" Canvas.Left="20" Canvas.Top="200" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
                 <StackPanel Width="200" Height="161" Background="#FFE0E0E0" Opacity="0.7">
 
@@ -449,7 +451,7 @@
 
 
             </Canvas>
-            
+
 
         </Canvas>
 

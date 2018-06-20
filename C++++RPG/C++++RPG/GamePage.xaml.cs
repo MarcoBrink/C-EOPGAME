@@ -108,7 +108,7 @@ namespace C____RPG
             timePlayedTimer = new DispatcherTimer();
             timePlayedTimer.Interval = new TimeSpan(0, 0, 1);
             timePlayedTimer.Tick += secondeTick;
-            timePlayedTimer.Start();
+            
 
             var story = _game.GetPlayer().getStory();
         
@@ -858,6 +858,16 @@ namespace C____RPG
             home_option.Visibility = Visibility.Visible;
             Misson_panel.Visibility = Visibility.Visible;
             stats.Visibility = Visibility.Visible;
+            newGame.Visibility = Visibility.Collapsed;
+            gameOverlay.Visibility = Visibility.Collapsed;
+            var Name = CharNameTB.Text;
+            woodcutting.Visibility = Visibility.Visible;
+            home_button.Visibility = Visibility.Visible;
+            mining.Visibility = Visibility.Visible;
+            fishing.Visibility = Visibility.Visible;
+            player_sprite.Visibility = Visibility.Visible;
+            timePlayedTimer.Start();
+
         }
 
 
