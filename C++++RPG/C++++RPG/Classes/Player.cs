@@ -1,30 +1,33 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace C____RPG
 {
     public class Player : Game
     {
         public string name { get; set; }
-        private int coins { get; set; }
-        private int playtime;
+        public int coins { get; set; }
+        private int totalcoinsearned;
+        private int totalplaytime;
+        private int sessionplaytime;
         private int sprite;
         private int design;
-        //private Inventory inventory;
+        private Inventory inventory;
 		private List<Skill> skills;
         private Skill currentSkill;
         private Location location;
-        //private Story missions;
-        private int exp;
-        private int[] level = { 0, 1, 2, 3, 4, 5 };
+        private Story missions;
+        private Stopwatch stopwatch;
 
         public Player(string name, int design)
         {
             this.name = name;
             this.design = design;
-            exp = 2;    
-            playtime = 0;
+            totalplaytime = 0;
+            sessionplaytime = 0;
+            inventory = new Inventory();
 
             location = new Location(868,475);
 
@@ -32,104 +35,138 @@ namespace C____RPG
             skills.Add(new Skill("fishing"));
             skills.Add(new Skill("mining"));
             skills.Add(new Skill("woodcutting"));
+
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
+            missions = new Story();
+            
+            
+
         }
 
-        public void Act(int basexp, String skillname)
+        public int Act(int basexp, Item resource)
         {
-            // Alles wat gedaan moet worden
-            foreach (Skill skill in skills)
+            int xp = 0;
+            if(currentSkill != null)
             {
-                /*
-                if(skill.Name == skillname)
+                List<Item> tools = inventory.GetTools();
+
+                // Loop through the tools and check for the best one to use
+                double bestmultiplier = 1;
+                foreach (Tool item in tools)
                 {
-                    currentSkill = skill;
+                    Dictionary<String, dynamic> itemdetails = item.GetItemDetails();
+                    if (itemdetails["skill"] == currentSkill.GetName())
+                    {
+                        bestmultiplier = itemdetails["multiplier"];
+                    }
                 }
-                else
-                {
-                    currentSkill = null;
-                }*/
+                // Calculate the experience points and increase it in the skill
+                xp = Convert.ToInt32(Math.Round(bestmultiplier * basexp));
+
+                currentSkill.IncreaseXP(xp);
             }
 
-            if(currentSkill == null)
+            // Add the item to the inventory
+            if(resource != null)
             {
-                // idle
+                inventory.AddItem(resource);
+            }
+
+            return xp;
+        }
+
+        public bool ChangeSkill(string skillname)
+        {
+            // Loop through the skills and set currentSkill to the right one
+            foreach (Skill skill in skills)
+            {                
+                if(skill.GetName().Equals(skillname))
+                {
+                    currentSkill = skill;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        public int ChangeCoins(int amount, bool plus)
+        {
+            // Increase or decrease the amount of coins depending on the parameter
+            if (plus)
+            {
+                coins += amount;
             }
             else
             {
-             /*   
-                List<Item> tools = inventory.GetTools();
-
-                
-                    foreach (Item item in tools)
-                    {
-                        if(item.Skillname == "woodcutting")
-                        {
-                            currentSkill = item.modifier * source.Experience;
-                        }
-                    }
-               
-                currentSkill.IncreaseXP();
-                */
+                coins -= amount;
             }
-        }
 
-        public int ChangeCoins(int amount)
-        {
-            coins = coins + amount;
+            // Add all positive amounts to totalcoinsearned
+            if (amount > 0)
+            {
+                totalcoinsearned = totalcoinsearned + amount;
+            }
             return coins;
         }
 
+        
+
         public Dictionary<String, dynamic> GetStats()
         {
+            // Create a new dictionary to put all the stats in
+            // name, coins, playtime, xp and lvl for each skill
             Dictionary<String, dynamic> dictionary = new Dictionary<String, dynamic>();
+            dictionary.Add("name", name);
             dictionary.Add("coins", coins);
-            dictionary.Add("playtime", playtime);
+            dictionary.Add("totalearned", totalcoinsearned);
 
-            foreach(Skill skill in skills)
+            stopwatch.Stop();
+            sessionplaytime = Convert.ToInt32(stopwatch.ElapsedMilliseconds) / 1000;
+            stopwatch.Start();
+
+            dictionary.Add("totalplaytime", totalplaytime + sessionplaytime);
+            dictionary.Add("sessionplaytime", sessionplaytime);
+
+            // Add all the xp and levels to the dictionary
+            var most = 0;
+            var mostplayed = "null";
+            foreach (Skill skill in skills)
             {
+                if (skill.GetXP() > most)
+                {
+                    most = skill.GetXP();
+                    mostplayed = skill.GetName();
+                }
                 dictionary.Add(skill.GetName() + "xp", skill.GetXP()); // "mining" + "xp", 312312312
                 dictionary.Add(skill.GetName() + "lvl", skill.GetLevel()); // "fishing" + "lvl", 12
-            }            
+            }
+
+            dictionary.Add("mostplayedskill", mostplayed);
+
 
             return dictionary;
         }
+
 
         public int GetSprite()
         {
             return sprite;
         }
-        
-        public double getHouse() {
-            if (exp == level[0])
-                return 41;
-            else if (exp == level[1])
-                return 46;
-            else if (exp == level[2])
-                return 47;
-            else if (exp == level[3])
-                return 39;
-            else if (exp == level[4])
-                return 48;
-            return 0;
-        }
-
-        public double getPathing(string side)
-        {
-            if (exp <= level[2])
-                if (side == "LL")
-                    return 44;
-                else if (side == "RL")
-                    return 45;
-                else if (side == "up")
-                    return 42;
-                else if (side == "sideways")
-                    return 43;
-            return 40;
-        }
 
         public Location getLocation()
         {
             return location;
+        }
+
+        public Story getStory()
+        {
+            return missions;
+        }
+
+        public Inventory GetInventory()
+        {
+            return inventory;
         }
 
     }

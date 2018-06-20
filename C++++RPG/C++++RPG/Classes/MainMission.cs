@@ -7,14 +7,16 @@ namespace C____RPG
 {
     public class MainMission : Mission
     {
-        private int levelRequired { get; }
-        private MainMission nextMission { get; } 
+        public int levelRequired { get; }
+        public Mission nextMission { get; }
 
 
-        public MainMission(String name, String description, int reward, int levelRequired, MainMission nextMission, Mode mode) : base(name,description,reward, mode)
+
+        public MainMission(String name, String description, int reward, int levelRequired, Mission nextMission) : base(name, description, reward)
         {
             this.levelRequired = levelRequired;
-            this.nextMission = nextMission;       
+            this.nextMission = nextMission;
         }
+            
     }
 }

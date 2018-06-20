@@ -10,6 +10,7 @@ using Windows.Media.Core;
 
 
 using System;
+using Windows.UI.Xaml;
 
 namespace C____RPG
 {
@@ -26,20 +27,44 @@ namespace C____RPG
         Song song;
         Dictionary<string, SoundEffect> audios;
         SoundEffectInstance instance = null;
+        public Shop shop { get; }
+
+
 
         public Game1()
         {
-
-           
-
             sources = new Dictionary<string, Source>();
             Item wood = new Resource("wood", "Wood comes from a tree", 5);
-            Item  ore = new Resource("wood", "looks valuable", 5);
+            Item  ore = new Resource("ore", "looks valuable", 5);
             Item fish = new Resource("fish", "fish! you can eat this", 5);
 
-            Source woodcutting = new Source("Woodcutting", null, 25, 100, 100);
+            Source woodcutting = new Source("Woodcutting", wood, 25, 100, 100);
             Source minining = new Source("mining", ore, 25, 100, 100);
             Source fishing = new Source("fishing", fish, 25, 100, 100);
+
+            shop = new Shop();
+
+            Item woodAxe = new Tool("wood_axe", "a wooden axe", 100, "woodcutting", 2, 0);
+            Item woodPickAxe = new Tool("wood_pickaxe", "a wooden pickaxe", 200, "mining", 2, 0);
+            Item stoneAxe = new Tool("stone_axe", "a stone axe", 300, "woodcutting", 2, 0);
+            Item stonePickAxe = new Tool("stone_pickaxe", "a stone pickaxe", 400, "mining", 2, 0);
+            Item ironAxe = new Tool("iron_axe", "an iron axe", 500, "woodcutting", 2, 0);
+            Item ironPickAxe = new Tool("iron_pickaxe", "an iron pickaxe", 600, "mining", 2, 0);
+            Item goldAxe = new Tool("gold_axe", "an iron axe", 700, "woodcutting", 2, 0);
+            Item goldPickAxe = new Tool("gold_pickaxe", "a gold pickaxe", 800, "mining", 2, 0);
+            Item diamondAxe = new Tool("diamond_axe", "a diamond axe", 900, "woodcutting", 2, 0);
+            Item diamondPickAxe = new Tool("diamond_pickaxe", "a diamond axe", 1000, "mining", 2, 0);
+
+            shop.AddItem(woodAxe);
+            shop.AddItem(woodPickAxe);
+            shop.AddItem(stoneAxe);
+            shop.AddItem(stonePickAxe);
+            shop.AddItem(ironAxe);
+            shop.AddItem(ironPickAxe);
+            shop.AddItem(goldAxe);
+            shop.AddItem(goldPickAxe);
+            shop.AddItem(diamondAxe);
+            shop.AddItem(diamondPickAxe);
 
             sources.Add("woodcutting", woodcutting);
             sources.Add("mining", minining);
@@ -163,17 +188,17 @@ namespace C____RPG
 {0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,40,40,40,40,40,40,40,40,40,40,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,15,15,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,40,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,15,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,40,40,40,40,40,40,0,0,0,0,0,0,0,0,40,40,40,40,40,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,40,40,40,40,0,0,0,40,40,40,40,},
+{0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,40,40,40,40,40,40,0,0,0,0,0,0,0,0,40,40,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,40,40,40,40,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,40,40,40,40,40,40,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,player1.getPathing("up"),0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,player1.getPathing("LL"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("sideways"),player1.getPathing("RL"),0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,40,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,0,0,0,0,0,40,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,40,40,40,40,40,40,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
              };
@@ -198,7 +223,7 @@ namespace C____RPG
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
-{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,player1.getHouse(),0,0,0,0,0,0,0,0,},
+{0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,39,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,},
 {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17,0,0,0,0,0,0,0,0,0,0,0,0,},
@@ -248,9 +273,7 @@ namespace C____RPG
         void MediaPlayer_MediaStateChanged(object sender, System.
                                            EventArgs e)
         {
-            // 0.0f is silent, 1.0f is full volume
-            MediaPlayer.Volume -= 0.1f;
-            MediaPlayer.Play(song);
+           
         }
 
         public Player GetPlayer()
@@ -258,9 +281,16 @@ namespace C____RPG
             return player1;
         }
 
-        public Dictionary<string, Source> getSources()
+        public Source getSource(String name)
         {
-            return sources;
+            foreach (var source in sources)
+            {
+                if (source.Key == name)
+                {
+                    return source.Value;
+                }
+            }
+            return null;
         }
 
         public void playSound(String soundname)
@@ -285,6 +315,24 @@ namespace C____RPG
                 instance.Stop();
             }
             
+        }
+
+        public void ToggleMediaplayer(bool audio)
+        {
+            if (audio)
+            {
+                MediaPlayer.Play(song);
+            }
+            else
+            {
+                MediaPlayer.Pause();
+            }
+            
+        }
+
+        public void QuitGame()
+        {
+            Application.Current.Exit();
         }
 
     }
