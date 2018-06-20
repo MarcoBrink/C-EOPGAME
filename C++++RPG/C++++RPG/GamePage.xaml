@@ -10,7 +10,14 @@
     mc:Ignorable="d">
 
     <SwapChainPanel x:Name="swapChainPanel" Width="1280" Height="840" VerticalAlignment="Top" HorizontalAlignment="Left">
-        
+        <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="990" VerticalAlignment="Top" Width="1490" Fill="Black"/>
+        <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#a67c52">
+            <Button Content="START" Canvas.Left="224" Canvas.Top="299" Click="Start_game" Background="#33E2E2E2" BorderBrush="Black" BorderThickness="1,1,1,1"   />
+            <TextBox Name="CharNameTB" Canvas.Left="158" TextWrapping="Wrap" Text="" Canvas.Top="48" Width="181" TextAlignment="Center" InputScope="Text" PlaceholderText="Name"/>
+            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Create your character" Canvas.Top="19" Width="475" FontWeight="Bold" FontSize="18" TextAlignment="Center"/>
+            <Rectangle Fill="#FFE4C8B0" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
+            <Image Source="Content/Player/down1.png" Canvas.Left="199" Canvas.Top="105" Height="173" Width="105"/>
+        </Canvas>
         <Canvas Width="1280" Height="840" VerticalAlignment="Top" HorizontalAlignment="Left" KeyDown="GeneralKeyDown" >
 
             <Canvas.Resources>
@@ -74,7 +81,7 @@
             <Button x:Name="fishing" Background="Transparent" Click="Fishing" Content="" BorderThickness="0" Canvas.Top="405" Height="212" Width="453" Opacity="0.01"/>
             <Button x:Name="home_button" Background="Transparent" Click="Home" Content="" BorderThickness="0" Canvas.Left="803" Canvas.Top="313" Height="171" Width="162" Opacity="0.01"/>
             <RelativePanel Canvas.Left="805" Canvas.Top="540">
-                <StackPanel Orientation="Horizontal" Width="218" Height="48" Background="#FF607285" Opacity="0.8" BorderBrush="Black" BorderThickness="1">
+                <StackPanel x:Name="stats" Orientation="Horizontal" Width="218" Height="48" Background="#FF607285" Opacity="0.8" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
 
                     <StackPanel Width="70">
                         <Image Source="Content/tools/wood_axe.png" Width="20" Height="20"/>
@@ -98,7 +105,7 @@
 
             </RelativePanel>
             
-            <RelativePanel Canvas.Left="20" Canvas.Top="200" BorderBrush="Black" BorderThickness="1">
+            <RelativePanel x:Name="Misson_panel" Canvas.Left="20" Canvas.Top="200" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
                 <StackPanel Width="200" Height="161" Background="#FFE0E0E0" Opacity="0.7">
 
                     <StackPanel Background="#FF5C6D7E">
@@ -123,7 +130,7 @@
 
                 </StackPanel>
             </RelativePanel>
-            <StackPanel x:Name="home_option" Width="143" Height="89" Canvas.Left="868" Canvas.Top="314" Background="White" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5">
+            <StackPanel x:Name="home_option" Width="143" Height="89" Canvas.Left="868" Canvas.Top="314" Background="White" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed">
                 <StackPanel.RenderTransform>
                     <CompositeTransform Rotation="10"/>
                 </StackPanel.RenderTransform>

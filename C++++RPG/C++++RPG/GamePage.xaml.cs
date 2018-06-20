@@ -853,5 +853,15 @@ namespace C____RPG
             oreView.Text = oreAmount.ToString();
         }
 
+        private void Start_game(object sender, RoutedEventArgs e)
+        {
+            home_option.Visibility = Visibility.Visible;
+            Misson_panel.Visibility = Visibility.Visible;
+            stats.Visibility = Visibility.Visible;
+        }
+
+
+
+
     }
 }
