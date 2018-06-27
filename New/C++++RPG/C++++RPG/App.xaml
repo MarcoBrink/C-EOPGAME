@@ -1,0 +1,9 @@
+﻿<Application
+    x:Class="C____RPG.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:C____RPG"
+    RequestedTheme="Dark"
+    >
+
+</Application>
