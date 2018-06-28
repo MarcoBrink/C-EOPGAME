@@ -7,11 +7,23 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:gif="using:XamlAnimatedGif"
-    mc:Ignorable="d">
+    RequestedTheme="Dark"
+    mc:Ignorable="d" MaxHeight="800" MaxWidth="1050" Background="Black" BorderBrush="Black">
 
-    <SwapChainPanel x:Name="swapChainPanel" Width="1280" Height="840" VerticalAlignment="Top" HorizontalAlignment="Left">
+    <SwapChainPanel RequestedTheme="Light" x:Name="swapChainPanel" Width="1080" Height="720" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-15,0,1,0" >
 
-        <Canvas Width="1280" Height="840" VerticalAlignment="Top" HorizontalAlignment="Left" >
+        <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="1610" VerticalAlignment="Top" Width="2080" Fill="Black"/>
+        <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#FFF9F9F9" Margin="281,104,504,380">
+
+            <Button Content="START" Canvas.Left="218" Canvas.Top="310" Click="Start_game" Background="#33000000" BorderBrush="Black" BorderThickness="1,1,1,1" FontFamily="Segoe UI Semibold" FontWeight="Bold"   />
+            <TextBox Name="CharNameTB"  Canvas.Left="158" TextWrapping="Wrap" Text="" Canvas.Top="48" Width="181" TextAlignment="Center" InputScope="Text" PlaceholderText="Name" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" FontSize="21" Background="#FF777777"/>
+            <StackPanel Height="43" Width="495" Background="#FF34495E">
+                <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Create your character" Canvas.Top="19" Width="475" FontSize="24" TextAlignment="Center" Foreground="White" FontFamily="Showcard Gothic"/>
+            </StackPanel>
+            <Rectangle Fill="#FFE8E8E8" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
+            <Image Source="Content/Player/player.png" Canvas.Left="199" Canvas.Top="105" Height="173" Width="105"/>
+        </Canvas>
+        <Canvas RequestedTheme="Light" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" KeyDown="GeneralKeyDown" Margin="0" >
 
             <Canvas.Resources>
 
@@ -55,7 +67,7 @@
 
                 </Storyboard>
             </Canvas.Resources>
-            <Image x:Name="player_sprite" gif:AnimationBehavior.SourceUri="Content/Player/down.gif" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" Canvas.Left="868" Canvas.Top="475" NineGrid="0" AutomationProperties.AccessibilityView="Content">
+            <Image x:Name="player_sprite" Visibility="Collapsed"  gif:AnimationBehavior.SourceUri="Content/Player/down.gif" RenderTransformOrigin="0.5,0.5" Height="32" Width="32" Canvas.Left="868" Canvas.Top="475" NineGrid="0" AutomationProperties.AccessibilityView="Content">
 
                 <Image.RenderTransform>
                     <TransformGroup>
@@ -66,30 +78,393 @@
                     </TransformGroup>
                 </Image.RenderTransform>
             </Image>
-            
 
-            <TextBlock x:Name="xp_gain_textblock" Canvas.Left="547" Visibility="Collapsed" TextWrapping="Wrap" Text="30xp" Canvas.Top="246"/>
+            <TextBlock x:Name="xp_gain_textblock" Canvas.Left="547" Visibility="Collapsed" TextWrapping="Wrap" Text="" Canvas.Top="246"/>
 
-            <Button x:Name="mining" Background="Transparent" Click="Mining" Content="" BorderThickness="0" Canvas.Left="607" Height="230" Width="404" Opacity="0.01"/>
-            <Button x:Name="woodcutting" Background="Transparent" Click="Woodcutting" Content="" BorderThickness="0" Height="272" Width="480" Opacity="0.01"/>
-            <Button x:Name="fishing" Background="Transparent" Click="Fishing" Content="" BorderThickness="0" Canvas.Top="405" Height="212" Width="453" Opacity="0.01"/>
-            <Button Background="Transparent" Click="Home" Content="" BorderThickness="0" Canvas.Left="803" Canvas.Top="313" Height="171" Width="162" Opacity="0.01"/>
+            <Button x:Name="mining" Visibility="Collapsed"  Background="#FF525252" Click="Mining" Content="" BorderThickness="0" Canvas.Left="607" Height="230" Width="404" Opacity="0.01"/>
+            <Button x:Name="woodcutting" Visibility="Collapsed"  Background="Transparent" Click="Woodcutting" Content="" BorderThickness="0" Height="272" Width="480" Opacity="0.01"/>
+            <Button x:Name="fishing" Visibility="Collapsed"  Background="Transparent" Click="Fishing" Content="" BorderThickness="0" Canvas.Top="405" Height="212" Width="453" Opacity="0.01"/>
+            <Button x:Name="home_button" Visibility="Collapsed" Background="Transparent" Click="Home" Content="" BorderThickness="0" Canvas.Left="803" Canvas.Top="313" Height="171" Width="162" Opacity="0.01"/>
+            <RelativePanel Canvas.Left="805" Canvas.Top="540">
+                <StackPanel x:Name="stats" Orientation="Horizontal" Width="218" Height="48" Background="#FF607285" Opacity="0.8" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
+
+                    <StackPanel Width="70">
+                        <Image x:Name="tool_axe" Source="Content/tools/wood_axe.png" Width="20" Height="20"/>
+                        <TextBlock FontSize="11" x:Name="woodcuttinglevel" Text="lvl: 0" HorizontalAlignment="Center" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                        <TextBlock FontSize="11" x:Name="woodcuttingxp" Text="xp: 0" HorizontalAlignment="Center" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel Width="70">
+                        <Image x:Name="tool_pick" Source="Content/tools/wood_pickaxe.png" Width="20" Height="20"/>
+                        <TextBlock FontSize="11" x:Name="mininglevel" Text="lvl: 0" HorizontalAlignment="Center" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                        <TextBlock FontSize="11" x:Name="miningxp" Text="xp: 0" HorizontalAlignment="Center" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                    </StackPanel>
+                    <StackPanel Width="70">
+                        <Image x:Name="tool_rod"  Source="Content/tools/fishing_rod_uncast.png" Width="20" Height="20"/>
+                        <TextBlock FontSize="11" x:Name="fishinglevel" Text="lvl: 0" HorizontalAlignment="Center" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                        <TextBlock FontSize="11" Text="xp: 0" x:Name="fishingxp" HorizontalAlignment="Center" Foreground="White" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                    </StackPanel>
+
+
+
+                </StackPanel>
+
+            </RelativePanel>
+
+            <RelativePanel x:Name="Misson_panel" Canvas.Left="20" Canvas.Top="200" BorderBrush="Black" BorderThickness="1" Visibility="Collapsed">
+                <StackPanel Width="200" Height="161" Background="#FFE0E0E0" Opacity="0.7">
+
+                    <StackPanel Background="#FF5C6D7E">
+                        <Viewbox Height="49" >
+                            <TextBlock x:Name="missionName" Margin="5"  FontSize="25" Text="Mission" HorizontalAlignment="Center" FontFamily="Showcard Gothic" Foreground="White" />
+                        </Viewbox>
+                    </StackPanel>
+
+
+                    <Viewbox Height="30">
+                        <TextBlock x:Name="missionDes" Margin="5"  FontSize="15" Text="Go find something!" HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                    </Viewbox>
+                    <Viewbox Height="39">
+                        <StackPanel Background="#FF5B6C7D" Width="250">
+                            <TextBlock Margin="5"  FontSize="20" Text="Reward" HorizontalAlignment="Center" Foreground="White" FontWeight="Bold" FontFamily="Segoe UI Semibold" />
+                        </StackPanel>
+
+                    </Viewbox>
+                    <Viewbox Height="28">
+                        <TextBlock x:Name="missionReward" Margin="5"  FontSize="15" Text="200 mining xp" HorizontalAlignment="Center" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                    </Viewbox>
+
+                </StackPanel>
+            </RelativePanel>
+            <StackPanel x:Name="home_option" Width="143" Height="108.425" Canvas.Left="866.313" Canvas.Top="322.352" Background="White" BorderBrush="Black" BorderThickness="1" RenderTransformOrigin="0.5,0.5" Visibility="Collapsed" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <StackPanel.RenderTransform>
+                    <CompositeTransform Rotation="10"/>
+                </StackPanel.RenderTransform>
+                <StackPanel Background="#FF34495E">
+                    <TextBlock Text="Options" FontFamily="Segoe UI Semibold" FontWeight="Bold" Foreground="White"/>
+                </StackPanel>
+
+                <Button x:Name="shop_button"  Margin="2" Visibility="Visible" Click="Start_Animation" Content="Shop" Width="138" BorderBrush="#FF9F9F9F" Background="#333C3C3C" FontFamily="Segoe UI Semibold" FontStyle="Italic" FontWeight="Bold" Foreground="#FF565656"/>
+                <Button x:Name="upgradeB" Margin="2" Visibility="Visible" Content="Updgrade" Width="138" BorderBrush="#FF8E8E8E" FontWeight="Bold" FontStyle="Italic" FontFamily="Segoe UI Semibold" Foreground="#FF565656" Click="Upgrade_home"/>
+                <StackPanel Background="#FF888888">
+                    <TextBlock x:Name="upgrade_button" Text="..." FontFamily="Segoe UI Semibold" FontWeight="Bold" Foreground="White" Margin="30,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            <Rectangle Name="overlay" HorizontalAlignment="Left" Height="990" VerticalAlignment="Top" Width="1490" Fill="Black" Visibility="Collapsed" Opacity="0.75"/>
+            <RelativePanel x:Name="setting" Visibility="Collapsed" Canvas.Left="375" Canvas.Top="120">
+                <StackPanel Width="300" Height="372" Background="White" Opacity="0.8" BorderBrush="Black" BorderThickness="1">
+
+                    <StackPanel Width="300" Height="230" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel BorderBrush="Black" BorderThickness="0,0,0,1" Background="#FF34495E">
+                            <TextBlock FontSize="40" Text="Settings" HorizontalAlignment="Center" Foreground="White" SelectionHighlightColor="White" FontFamily="Showcard Gothic"  />
+                        </StackPanel>
+
+                        <StackPanel Margin="20" BorderBrush="Black" BorderThickness="1" Background="#FFECECEC">
+                            <TextBlock x:Name="timeplayed" Margin="5" FontSize="20" Text="Time played:" HorizontalAlignment="Left" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                            <TextBlock x:Name="totalxp" Margin="5"  FontSize="20" Text="Total xp gained: " HorizontalAlignment="Left" FontWeight="Bold" />
+                            <TextBlock x:Name="mostplayed" Margin="5"  FontSize="20" Text="Most played skill: " HorizontalAlignment="Left" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                            <TextBlock x:Name="goldearned" Margin="5"  FontSize="20" Text="Total gold earned: " HorizontalAlignment="Left" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                        </StackPanel>
+
+                    </StackPanel>
+                    <StackPanel Width="260" Height="100" Orientation="Horizontal" BorderBrush="Black" BorderThickness="1" Background="#FFECECEC">
+                        <StackPanel Margin="20,20,0,0" Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button x:Name="quit" BorderBrush="Black" Width="100" Height="50" Content="Quit game" BorderThickness="1" Opacity="1" Click="QuitGame" FontFamily="Segoe UI Semibold" Background="#FFC3C3C3" FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Margin="20,20,0,0" Width="100" Height="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Button BorderBrush="Black" Width="100" Height="50" Click="SaveGame" Content="Save Game" BorderThickness="1" Opacity="1" Background="#FFC3C3C3" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+
+
+
+                    <StackPanel Margin="20,10,0,0"  Height="20" Width="20" HorizontalAlignment="Left" BorderBrush="Black" BorderThickness="1">
+                        <Image x:Name="sound" Source="Content/misc/high-volume.png" Width="20" Height="18" Tapped="MuteChange" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    </StackPanel>
+
+                </StackPanel>
+            </RelativePanel>
+            <RelativePanel x:Name="inventory" Canvas.Left="345" Canvas.Top="200" Visibility="Collapsed">
+                <StackPanel Width="360" Height="227" Background="White" BorderBrush="Black" BorderThickness="1" Opacity="0.8">
+                    <StackPanel Orientation="Horizontal" Width="360" BorderBrush="Black" BorderThickness="1" Background="#FF34495E">
+                        <TextBlock Width="270" Margin="0,0,0,0"  FontSize="32" Text="Inventory" HorizontalAlignment="Center" FontFamily="Showcard Gothic" Foreground="White" SelectionHighlightColor="White" />
+
+                        <Image Source="Content/resources/coin bag.png" Width="40" Height="40" />
+                        <Viewbox Width="40" Height="40">
+                            <TextBlock x:Name="inventory_money" Text="0" HorizontalAlignment="Center" SelectionHighlightColor="White" Foreground="White" />
+                        </Viewbox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <StackPanel Orientation="Horizontal" Width="90" Height="90" BorderBrush="Black" BorderThickness="1">
+                            <Image Source="Content/resources/wood.png" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock x:Name="inventory_wood" Text="0" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="90" BorderBrush="Black" BorderThickness="1" Background="#FFDDDDDD">
+                            <Image Source="Content/resources/fish.png" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock x:Name="inventory_fish" Text="0" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="90" BorderBrush="Black" BorderThickness="1">
+                            <Image Source="Content/resources/ore.png" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock x:Name="inventory_ore" Text="0" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="90" BorderBrush="Black" BorderThickness="1" Background="#FFDDDDDD">
+                            <Image Source="Content/resources/" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock Text="" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" >
+                        <StackPanel Orientation="Horizontal" Width="90" Height="90" BorderBrush="Black" BorderThickness="1" Background="#FFDDDDDD">
+                            <Image Source="Content/resources/" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock Text="" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="90" BorderBrush="Black" BorderThickness="1">
+                            <Image Source="Content/resources/" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock Text="" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="90" BorderBrush="Black" BorderThickness="1" Background="#FFDDDDDD">
+                            <Image Source="Content/resources/" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock Text="" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal" Width="90" BorderBrush="Black" BorderThickness="1">
+                            <Image Source="Content/resources/" Width="40" Height="40" />
+                            <Viewbox Width="40" Height="40">
+                                <TextBlock Text="" HorizontalAlignment="Center" />
+                            </Viewbox>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </RelativePanel>
+
+            <!-- Shop -->
+            <Canvas Name="gameMenu" Height="356" Canvas.Left="277" Canvas.Top="120" Width="495" Visibility="Collapsed" >
+
+
+                <Rectangle Height="291" Width="495" Canvas.Top="36" Fill="#FFE0E0E0"/>
+
+                <Border BorderBrush="#FF888888" BorderThickness="0 0 0 5">
+                    <Border BorderBrush="White" BorderThickness="0 0 0 5">
+                        <Rectangle Fill="#FF34495E" Height="39" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="495"/>
+                    </Border>
+                </Border>
+
+                <Border  BorderBrush="DimGray"  BorderThickness="1" Canvas.Left="456" Canvas.Top="7" Height="24" >
+                    <Button Click="Menu_Close"  Canvas.Left="376" Canvas.Top="4" Width="27" Padding="0" Background="#FF45617D" Content="X" Foreground="White"  VerticalAlignment="Stretch"/>
+                </Border>
+
+                <Border  BorderBrush="#4E4A4E"  BorderThickness="1"  Canvas.Left="12" Canvas.Top="7">
+                    <TextBlock x:Name="goldView" Canvas.Left="792" TextWrapping="Wrap" Text="Gold      000.000" Canvas.Top="184" Foreground="#FFFFB500" Padding="2" FontSize="15" Width="121" Height="22" SelectionHighlightColor="White" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                </Border>
+
+                <Border  BorderBrush="#4E4A4E"  BorderThickness="1" Background="#FF949494" Canvas.Left="139" Canvas.Top="7" Height="24">
+                    <RelativePanel Canvas.Left="367" Canvas.Top="85" Width="100" Margin="0,0,0,-1">
+                        <Image Canvas.Left="619" Canvas.Top="212" Source="content/Resources\wood.png" Margin="4,-1,8,0"/>
+                        <TextBlock x:Name="woodView" Canvas.Left="792" TextWrapping="Wrap" Text="100.000" Canvas.Top="184" Foreground="White" Padding="2" FontSize="15" Height="22" Margin="35,0,-25,0" Width="auto" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                    </RelativePanel>
+                </Border>
+
+                <Border  BorderBrush="#4E4A4E"  BorderThickness="1" Background="#FF949494" Canvas.Left="245" Canvas.Top="7" Height="24">
+                    <RelativePanel Canvas.Left="367" Canvas.Top="85" Width="100" Margin="0,0,0,-1">
+                        <Image Canvas.Left="619" Canvas.Top="212" Source="content/Resources\fish.png" Margin="4,-1,8,0"/>
+                        <TextBlock x:Name="fishView" Canvas.Left="792" TextWrapping="Wrap" Text="100.000" Canvas.Top="184" Foreground="White" Padding="2" FontSize="15" Height="22" Margin="35,0,-25,0" Width="auto" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                    </RelativePanel>
+                </Border>
+
+                <Border  BorderBrush="#4E4A4E"  BorderThickness="1" Background="#FF949494" Canvas.Left="351" Canvas.Top="7" Height="24">
+                    <RelativePanel Canvas.Left="367" Canvas.Top="85" Width="100" Margin="0,0,0,-1">
+                        <Image Canvas.Left="619" Canvas.Top="212" Source="content/Resources\ore.png" Margin="4,-1,8,0"/>
+                        <TextBlock x:Name="oreView" Canvas.Left="792" TextWrapping="Wrap" Text="100.000" Canvas.Top="184" Foreground="White" Padding="2" FontSize="15" Height="22" Margin="35,0,-25,0" Width="auto" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                    </RelativePanel>
+                </Border>
+
+
+
+
+
+                <!--The scroll view with the possibility to buy items -->
+                <Border  BorderBrush="#4E4A4E"  BorderThickness="2"  Canvas.Left="288" Canvas.Top="76" Height="234">
+                    <ScrollViewer Canvas.Left="294" Canvas.Top="103" Width="191"  VerticalScrollBarVisibility="Auto" Margin="0,-1.5">
+                        <StackPanel Name="items" VerticalAlignment="Top" HorizontalAlignment="Left" Height="auto" Width="auto">
+
+                        </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <TextBlock Canvas.Left="288" TextWrapping="Wrap" Text="Tools" Canvas.Top="58" Foreground="Black" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                <TextBlock Visibility="Collapsed" TextWrapping="Wrap" Text="Buy Resources" Canvas.Top="58" Foreground="Black" Canvas.Left="10" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                <TextBlock TextWrapping="Wrap" Text="Sell Resources" Canvas.Top="58" Foreground="Black" Canvas.Left="12" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+
+
+                <Border Visibility="Collapsed" BorderBrush="#FF34495E" BorderThickness="1" Height="99" Canvas.Left="11" Canvas.Top="81" Width="251">
+                    <RelativePanel Margin="0,0,0,75" Background="#FF34495E">
+                        <TextBlock  Text="Amount:" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="8,0,-25,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+                        <TextBlock  Text="100" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="77,0,-94,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+                        <TextBlock  Text="1000" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="114,0,-131,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+                        <TextBlock  Text="10.000" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="154,0,-171,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+
+                        <StackPanel Canvas.Left="162" Canvas.Top="222" Margin="0,23,-249,-97">
+                            <Border BorderBrush="#FF34495E" BorderThickness="2" Height="25" Canvas.Left="12" Canvas.Top="104" Width="250" Background="#FFECECEC">
+                                <RelativePanel Margin="-1">
+                                    <Image Canvas.Left="619" Canvas.Top="212" Source="Content/resources\wood.png" Margin="12,-1,0,0"/>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="wood100" Tag="100" Height="37" Width="75" GroupName="BuyWood" IsChecked="True"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="wood1000" Tag="1000"  Height="37" Width="75" GroupName="BuyWood"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="155,0,73,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="wood10000" Tag="10000"  Height="37" Width="75" GroupName="BuyWood"/>
+                                    </Viewbox>
+                                    <Border  Background="#442434" Margin="201,5,-160,-5" Height="15" VerticalAlignment="Top" BorderBrush="Black"  >
+                                        <Button Name="BuyWood" Content="Buy" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="40" Foreground="Black" FontSize="9" Padding="0" Margin="0,-1,0,0" Background="#FFC3C3C3" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                                    </Border>
+                                    <TextBlock Canvas.Left="213" TextWrapping="Wrap" Text="($8)" Canvas.Top="282" FontSize="10" Foreground="Black" HorizontalAlignment="Left" Margin="40,4,-40.5,-16.5" Width="23" FontWeight="Bold"/>
+
+                                </RelativePanel>
+                            </Border>
+                            <Border BorderBrush="#FF34495E" BorderThickness="2" Height="25" Canvas.Left="12" Canvas.Top="104" Width="250" Background="#FFECECEC">
+                                <RelativePanel Margin="-1">
+                                    <Image Canvas.Left="619" Canvas.Top="212" Source="content/resources\fish.png" Margin="12,-1,-1,0"/>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Tag="100" Height="37" Width="75" GroupName="BuyFish" IsChecked="True"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Tag="1000" Height="37" Width="75" GroupName="BuyFish"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="155,0,73,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Tag="10000" Height="37" Width="75" GroupName="BuyFish"/>
+                                    </Viewbox>
+                                    <Border  Background="#442434" Margin="201,5,-160,-5" Height="15" VerticalAlignment="Top"  >
+                                        <Button Name="BuyFish" Content="Buy" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="40" Foreground="Black" FontSize="9" Padding="0" Margin="0,-1,0,0" Background="#FFC3C3C3" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                                    </Border>
+                                    <TextBlock  Canvas.Left="213" TextWrapping="Wrap" Text="($8)" Canvas.Top="282" FontSize="10" Foreground="Black" HorizontalAlignment="Left" Margin="40,4,-40.5,-16.5" Width="23" FontWeight="Bold"/>
+
+                                </RelativePanel>
+                            </Border>
+                            <Border BorderBrush="#FF34495E" BorderThickness="2" Height="25" Canvas.Left="12" Canvas.Top="104" Width="250" Background="#FFECECEC">
+                                <RelativePanel Margin="-1">
+                                    <Image Canvas.Left="619" Canvas.Top="212" Source="content/resources\ore.png" Margin="12,0,5,0"/>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Tag="100" Height="37" Width="75" GroupName="BuyOre" IsChecked="True"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Tag="1000" Height="37" Width="75" GroupName="BuyOre"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="155,0,73,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Tag="10000" Height="37" Width="75" GroupName="BuyOre"/>
+                                    </Viewbox>
+                                    <Border  Background="#442434" Margin="201,5,-160,-5" Height="15" VerticalAlignment="Top"  >
+                                        <Button Name="BuyOre" Content="Buy" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="40" Foreground="Black" FontSize="9" Padding="0" Margin="0,-1,0,0" Background="#FFC3C3C3" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                                    </Border>
+                                    <TextBlock Canvas.Left="213" TextWrapping="Wrap" Text="($8)" Canvas.Top="282" FontSize="10" Foreground="Black" HorizontalAlignment="Left" Margin="40,4,-40.5,-16.5" Width="23" FontWeight="Bold"/>
+
+                                </RelativePanel>
+                            </Border>
+                        </StackPanel>
+
+
+                    </RelativePanel>
+
+
+
+
+                </Border>
+
+                <Border BorderBrush="#FF34495E" BorderThickness="1" Height="99" Canvas.Left="12" Canvas.Top="81" Width="251" Background="White">
+                    <RelativePanel Margin="0,0,0,75" Background="#FF34495E">
+                        <TextBlock  Text="Amount:" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="8,0,-25,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+                        <TextBlock  Text="100" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="77,0,-94,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+                        <TextBlock  Text="1000" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="114,0,-131,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+                        <TextBlock  Text="10.000" Canvas.Top="194" Foreground="White" FontSize="10" Height="14" Margin="154,0,-171,-18" VerticalAlignment="Bottom" FontFamily="Segoe UI Semibold"/>
+
+                        <StackPanel Canvas.Left="162" Canvas.Top="222" Margin="0,23,-249,-97">
+                            <Border BorderBrush="#FF34495E" BorderThickness="2" Height="25" Canvas.Left="12" Canvas.Top="104" Width="250" Background="#FFECECEC">
+                                <RelativePanel Margin="-1">
+                                    <Image Canvas.Left="619" Canvas.Top="212" Source="content/Resources\wood.png" Margin="12,-1,0,0"/>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellWood100" Height="37" Width="75" GroupName="SellWood" IsChecked="True"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellWood1000"  Height="37" Width="75" GroupName="SellWood"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="155,0,73,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellWood10000"  Height="37" Width="75" GroupName="SellWood"/>
+                                    </Viewbox>
+                                    <Border  Background="#442434" Margin="201,5,-160,-5" Height="15" VerticalAlignment="Top"  >
+                                        <Button Name="SellWood" Content="Sell" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="40" Foreground="Black" FontSize="9" Padding="0" Margin="0,-1,0,0" Background="#FFC3C3C3" FontFamily="Segoe UI Semibold" FontWeight="Bold" />
+                                    </Border>
+                                    <TextBlock Canvas.Left="213" TextWrapping="Wrap" Text="($5)" Canvas.Top="282" FontSize="10" Foreground="Black" HorizontalAlignment="Left" Margin="40,4,-40.5,-16.5" Width="23" FontWeight="Bold"/>
+                                </RelativePanel>
+                            </Border>
+                            <Border BorderBrush="#FF34495E" BorderThickness="2" Height="25" Canvas.Left="12" Canvas.Top="104" Width="250" Background="#FFECECEC">
+                                <RelativePanel Margin="-1">
+                                    <Image Canvas.Left="619" Canvas.Top="212" Source="content/Resources\fish.png" Margin="12,-1,-1,0"/>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellFish100" Height="37" Width="75" GroupName="SellFish" IsChecked="True"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellFish1000" Height="37" Width="75" GroupName="SellFish"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="155,0,73,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellFish10000" Height="37" Width="75" GroupName="SellFish"/>
+                                    </Viewbox>
+                                    <Border  Background="#442434" Margin="201,5,-160,-5" Height="15" VerticalAlignment="Top"  >
+                                        <Button Name="SellFish" Content="Sell" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="40" Foreground="Black" FontSize="9" Padding="0" Margin="0,-1,0,0" Background="#FFC3C3C3" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                                    </Border>
+                                    <TextBlock Canvas.Left="213" TextWrapping="Wrap" Text="($5)" Canvas.Top="282" FontSize="10" Foreground="Black" HorizontalAlignment="Left" Margin="40,4,-40.5,-16.5" Width="23" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                                </RelativePanel>
+                            </Border>
+                            <Border BorderBrush="#FF34495E" BorderThickness="2" Height="25" Canvas.Left="12" Canvas.Top="104" Width="250" Background="#FFECECEC">
+                                <RelativePanel Margin="-1">
+                                    <Image Canvas.Left="619" Canvas.Top="212" Source="content/Resources\ore.png" Margin="12,0,5,0"/>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellOre100" Height="37" Width="75" GroupName="SellOre" IsChecked="True"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellOre1000" Height="37" Width="75" GroupName="SellOre"/>
+                                    </Viewbox>
+                                    <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="155,0,73,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
+                                        <RadioButton Name="SellOre10000"  Height="37" Width="75" GroupName="SellOre"/>
+                                    </Viewbox>
+                                    <Border  Background="#442434" Margin="201,5,-160,-5" Height="15" VerticalAlignment="Top"  >
+                                        <Button Name="SellOre" Content="Sell" HorizontalAlignment="Left" Height="15" VerticalAlignment="Top" Width="40" Foreground="Black" FontSize="9" Padding="0" Margin="0,-1,0,0" Background="#FFC3C3C3" FontWeight="Bold" FontFamily="Segoe UI Semibold"/>
+                                    </Border>
+                                    <TextBlock Canvas.Left="213" TextWrapping="Wrap" Text="($5)" Canvas.Top="282" FontSize="10" Foreground="Black" HorizontalAlignment="Left" Margin="40,4,-40.5,-16.5" Width="23" FontFamily="Segoe UI Semibold" FontWeight="Bold"/>
+                                </RelativePanel>
+                            </Border>
+                        </StackPanel>
+
+
+                    </RelativePanel>
+
+
+
+
+                </Border>
+
+
+            </Canvas>
+
 
         </Canvas>
-
-        <!-- Startscherm   -->
-        <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="990" VerticalAlignment="Top" Width="1490" Fill="Black"/>
-        <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#a67c52">
-            <Button Content="START" Canvas.Left="224" Canvas.Top="299" Click="Button_Click_1" Background="#33E2E2E2" BorderBrush="Black" BorderThickness="1,1,1,1"   />
-            <TextBox Name="CharNameTB" Canvas.Left="158" TextWrapping="Wrap" Text="" Canvas.Top="48" Width="181" TextAlignment="Center" InputScope="Text" PlaceholderText="Name"/>
-            <TextBlock Canvas.Left="10" TextWrapping="Wrap" Text="Create your character" Canvas.Top="19" Width="475" FontWeight="Bold" FontSize="18" TextAlignment="Center"/>
-            <Rectangle Fill="#FFE4C8B0" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
-            <Image Source="Assets/player.png" Canvas.Left="199" Canvas.Top="105" Height="173" Width="105"/>
-        </Canvas>
-
     </SwapChainPanel>
 
 
 
+
 </Page>
+    
     

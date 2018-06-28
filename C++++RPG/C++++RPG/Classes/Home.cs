@@ -24,6 +24,7 @@ namespace C____RPG
         public void Upgrade()
         {
             tier += 1;
+            
         }
         
     }

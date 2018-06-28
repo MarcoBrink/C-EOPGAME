@@ -7,10 +7,10 @@ namespace C____RPG
     public class Source
     {
 
-        private string Name { get; }
+        public string Name { get; }
         public int Experience { get; }
         public Location Location { get; set; }
-        private Item resource;
+        public Item resource { get; set; }
 
 
         public Source(string name, Item resource, int experience , int x, int y)

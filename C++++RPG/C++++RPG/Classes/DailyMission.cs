@@ -20,7 +20,7 @@ namespace C____RPG
             }
         }
 
-        public DailyMission(String name, String description, int reward, DateTime timeStarted, Mode mode) : base(name,description,reward, mode)
+        public DailyMission(String name, String description, int reward, DateTime timeStarted, string skill, int toGo) : base(name,description,reward, toGo, skill)
         {
             this.timeStarted = timeStarted;
         }

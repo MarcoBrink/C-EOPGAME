@@ -106,8 +106,9 @@ namespace C____RPG
             // parameter
             rootFrame.Navigate(typeof(GamePage), e.Arguments);
         }
-        // Ensure the current window is active
-        Window.Current.Activate();
+     
+            // Ensure the current window is active
+            Window.Current.Activate();
     }
 
     /// <summary>

@@ -7,22 +7,24 @@ namespace C____RPG
 {
     public abstract class Mission
     {
-        private String name;
-        private String description;
-        private int reward;
+
         private bool finished;
         private bool started { get; set; }
-        public enum Mode { easy, normal, hard };
-        private Mode mode;
-        
+        public string name { get; set; }
+        public string description { get; set; }
+        public int reward { get; set; }
+        public int toGo { get; }
+        public string skill { get; }
 
-        public Mission(String name, String description, int reward, Mode mode)
+
+        public Mission(String name, String description, int reward, int toGo, string skill)
         {
             this.name = name;
             this.description = description;
-            this.mode = mode;
             this.reward = reward;
             this.started = false;
+            this.skill = skill;
+            this.toGo = toGo;
         }
 
         public bool SetFinished()

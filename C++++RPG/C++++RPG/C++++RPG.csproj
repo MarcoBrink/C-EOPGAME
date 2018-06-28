@@ -109,7 +109,6 @@
     <Compile Include="Classes\Item.cs" />
     <Compile Include="Classes\Location.cs" />
     <Compile Include="Classes\MainMission.cs" />
-    <Compile Include="Classes\Map.cs" />
     <Compile Include="Classes\Mission.cs" />
     <Compile Include="Classes\Player.cs" />
     <Compile Include="Classes\Resource.cs" />
@@ -119,13 +118,14 @@
     <Compile Include="Classes\Skill.cs" />
     <Compile Include="Classes\Source.cs" />
     <Compile Include="Classes\Story.cs" />
-    <Compile Include="Classes\Tile.cs" />
     <Compile Include="Classes\Tool.cs" />
     <Compile Include="GamePage.xaml.cs">
       <DependentUpon>GamePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Game1.cs" />
+    <Compile Include="Classes\Map.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Classes\Tile.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
@@ -134,13 +134,19 @@
     <AppxManifest Include="Package.appxmanifest">
       <SubType>Designer</SubType>
     </AppxManifest>
+    <None Include="C++++RPG_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\player.png" />
+    <Content Include="Content\Audio\gold.wav" />
     <Content Include="Content\Audio\main.mp3" />
+    <Content Include="Content\Audio\menu.wav" />
     <Content Include="Content\Audio\mining.wav" />
+    <Content Include="Content\Audio\quest.wav" />
+    <Content Include="Content\Audio\upgrade.wav" />
     <Content Include="Content\Audio\water.wav" />
     <Content Include="Content\Audio\woodcutting.wav" />
+    <Content Include="Content\misc\high-volume.png" />
+    <Content Include="Content\misc\no-audio.png" />
     <Content Include="Content\Player\down.gif" />
     <Content Include="Content\Player\down1.png" />
     <Content Include="Content\Player\down2.png" />
@@ -157,6 +163,7 @@
     <Content Include="Content\Player\mine.gif" />
     <Content Include="Content\Player\mine1.png" />
     <Content Include="Content\Player\mine2.png" />
+    <Content Include="Content\Player\player.png" />
     <Content Include="Content\Player\right.gif" />
     <Content Include="Content\Player\right1.png" />
     <Content Include="Content\Player\right2.png" />
@@ -173,11 +180,28 @@
     <Content Include="Content\Player\woodcutting.gif" />
     <Content Include="Content\Player\woodcutting1.png" />
     <Content Include="Content\Player\woodcutting2.png" />
-    <Content Include="Content\tiles\resources\coin bag.png" />
-    <Content Include="Content\tiles\resources\coin.png" />
-    <Content Include="Content\tiles\resources\fish.png" />
-    <Content Include="Content\tiles\resources\ore.png" />
-    <Content Include="Content\tiles\resources\wood.png" />
+    <Content Include="Content\resources\coin bag.png" />
+    <Content Include="Content\resources\coin.png" />
+    <Content Include="Content\resources\diamond axe.png" />
+    <Content Include="Content\resources\diamond rod.png" />
+    <Content Include="Content\resources\diamond pickaxe.png" />
+    <Content Include="Content\resources\fish.png" />
+    <Content Include="Content\resources\fishing_rod_uncast.png" />
+    <Content Include="Content\resources\gold axe.png" />
+    <Content Include="Content\resources\gold rod.png" />
+    <Content Include="Content\resources\gold pickaxe.png" />
+    <Content Include="Content\resources\iron axe.png" />
+    <Content Include="Content\resources\iron rod.png" />
+    <Content Include="Content\resources\iron pickaxe.png" />
+    <Content Include="Content\resources\ore.png" />
+    <Content Include="Content\resources\stone axe.png" />
+    <Content Include="Content\resources\stone rod.png" />
+    <Content Include="Content\resources\stone pickaxe.png" />
+    <Content Include="Content\resources\wood.png" />
+    <Content Include="Content\resources\wood axe.png" />
+    <Content Include="Content\resources\wood rod.png" />
+    <Content Include="Content\resources\wood pickaxe.png" />
+    <Content Include="Content\tiles\tile1.png" />
     <Content Include="Content\tiles\tile12.png" />
     <Content Include="Content\tiles\tile13.png" />
     <Content Include="Content\tiles\tile14.png" />
@@ -209,17 +233,20 @@
     <Content Include="Content\tiles\tile7.png" />
     <Content Include="Content\tiles\tile8.png" />
     <Content Include="Content\tiles\tile9.png" />
-    <Content Include="Content\tiles\tools\diamond_axe.png" />
-    <Content Include="Content\tiles\tools\diamond_pickaxe.png" />
-    <Content Include="Content\tiles\tools\fishing_rod_uncast.png" />
-    <Content Include="Content\tiles\tools\gold_axe.png" />
-    <Content Include="Content\tiles\tools\gold_pickaxe.png" />
-    <Content Include="Content\tiles\tools\iron_axe.png" />
-    <Content Include="Content\tiles\tools\iron_pickaxe.png" />
-    <Content Include="Content\tiles\tools\stone_axe.png" />
-    <Content Include="Content\tiles\tools\stone_pickaxe.png" />
-    <Content Include="Content\tiles\tools\wood_axe.png" />
-    <Content Include="Content\tiles\tools\wood_pickaxe.png" />
+    <Content Include="Content\tiles\walk2.png" />
+    <Content Include="Content\tiles\walk3.png" />
+    <Content Include="Content\tiles\walk4.png" />
+    <Content Include="Content\tools\diamond_axe.png" />
+    <Content Include="Content\tools\diamond_pickaxe.png" />
+    <Content Include="Content\tools\fishing_rod_uncast.png" />
+    <Content Include="Content\tools\gold_axe.png" />
+    <Content Include="Content\tools\gold_pickaxe.png" />
+    <Content Include="Content\tools\iron_axe.png" />
+    <Content Include="Content\tools\iron_pickaxe.png" />
+    <Content Include="Content\tools\stone_axe.png" />
+    <Content Include="Content\tools\stone_pickaxe.png" />
+    <Content Include="Content\tools\wood_axe.png" />
+    <Content Include="Content\tools\wood_pickaxe.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -250,7 +277,7 @@
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>

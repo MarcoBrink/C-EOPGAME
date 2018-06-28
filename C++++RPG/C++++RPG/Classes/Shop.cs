@@ -1,10 +1,11 @@
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace C____RPG
 {
-    public class Shop : Game
+    public class Shop
     {
         private String name;
         private List<Item> items;
@@ -13,10 +14,12 @@ namespace C____RPG
 
         public Shop()
         {
+            items = new List<Item>();
         }
         
         public List<Item> GetItems()
         {
+            Debug.WriteLine("SIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII");
             return items;
         }
 
@@ -25,6 +28,11 @@ namespace C____RPG
             return location;
         }
 
+        public void AddItem(Item item)
+        {
+            
+            items.Add(item);
+        }
 
 
 
