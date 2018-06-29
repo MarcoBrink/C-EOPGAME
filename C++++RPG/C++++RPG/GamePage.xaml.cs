@@ -23,6 +23,8 @@ using Windows.Media.Core;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI;
 using Windows.UI.ViewManagement;
+using Windows.Graphics.Display;
+
 
 namespace C____RPG
 {
@@ -33,6 +35,7 @@ namespace C____RPG
         private readonly Game1 _game;
         private List<Animation> animations;
         private string currentLocation;
+        
 
         //Timers for moving the player and update
         private DispatcherTimer actTimer;
@@ -53,13 +56,33 @@ namespace C____RPG
             //sets the width and height from the window
             myGamePage.Width = Window.Current.Bounds.Width;
             myGamePage.Height = Window.Current.Bounds.Height;
-            
 
+          
             audiotoggle = false;
 
             // Create Background of the game
             var launchArguments = string.Empty;
 
+            //Changes the scale when users are using a different windows resolution
+            
+            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
+            if (scaleFactor == 1)
+            {
+                panelScale.ScaleX = 1.25;
+                panelScale.ScaleY = 1.25;
+            }
+            else if (scaleFactor == 1.25)
+            {
+                panelScale.ScaleX = 1;
+                panelScale.ScaleY = 1;
+            }
+            else if (scaleFactor == 1.50)
+            {
+                panelScale.ScaleX = 0.835;
+                panelScale.ScaleY = 0.835;
+            }
+            
+            
             _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
 
             //current location to check what animation should play. 

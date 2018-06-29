@@ -177,7 +177,7 @@ namespace C____RPG
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.Black);
 
             spriteBatch.Begin();
             map.Draw(spriteBatch);

@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Windows.Graphics.Display;
+
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=402347&clcid=0x409
 
@@ -107,9 +109,10 @@ namespace C____RPG
             // parameter
             rootFrame.Navigate(typeof(GamePage), e.Arguments);
         }
-
-            ApplicationView.PreferredLaunchViewSize = new Size(800, 800);
+            
+            ApplicationView.PreferredLaunchViewSize = new Size(1080, 720);
             ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+            
 
             // Ensure the current window is active
             Window.Current.Activate();
