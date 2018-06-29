@@ -53,12 +53,13 @@ namespace C____RPG
             //sets the width and height from the window
             myGamePage.Width = Window.Current.Bounds.Width;
             myGamePage.Height = Window.Current.Bounds.Height;
+            
 
             audiotoggle = false;
 
             // Create Background of the game
             var launchArguments = string.Empty;
-            ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(100, 100));
+
             _game = MonoGame.Framework.XamlGame<Game1>.Create(launchArguments, Window.Current.CoreWindow, swapChainPanel);
 
             //current location to check what animation should play. 
@@ -998,16 +999,5 @@ namespace C____RPG
             button.IsEnabled = true;
         }
 
-        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-     
-                if ((this.Width != 1080) & (this.Height != 720))
-                {
-                    this.Width = 1080;
-                    this.Height = 720;
-                Debug.WriteLine(Window.Current.Bounds);
-                }
-            
-        }
     }
 }

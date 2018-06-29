@@ -7,12 +7,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:gif="using:XamlAnimatedGif"
-    RequestedTheme="Dark"
-    mc:Ignorable="d" MaxHeight="800" MaxWidth="1050" Background="Black" BorderBrush="Black">
+    
+    mc:Ignorable="d" MaxHeight="720" MaxWidth="1080" Width="1080" MinWidth="1080" MinHeight="720" HorizontalAlignment="Left" VerticalAlignment="Top" >
 
-    <SwapChainPanel RequestedTheme="Light" x:Name="swapChainPanel" Width="1080" Height="720" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="-15,0,1,0" >
+    <SwapChainPanel RequestedTheme="Light" x:Name="swapChainPanel" Width="Auto" Height="Auto" VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="1080" MinHeight="720" >
 
-        <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="1610" VerticalAlignment="Top" Width="2080" Fill="Black"/>
+        <Rectangle x:Name="gameOverlay" HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1080" Fill="Black"/>
         <Canvas Name="newGame" Height="356" Canvas.Left="325" Canvas.Top="123" Width="495" Background="#FFF9F9F9" Margin="281,104,504,380">
 
             <Button Content="START" Canvas.Left="218" Canvas.Top="310" Click="Start_game" Background="#33000000" BorderBrush="Black" BorderThickness="1,1,1,1" FontFamily="Segoe UI Semibold" FontWeight="Bold"   />
@@ -23,7 +23,7 @@
             <Rectangle Fill="#FFE8E8E8" Height="185" Canvas.Left="92" Stroke="Black" Canvas.Top="100" Width="329"/>
             <Image Source="Content/Player/player.png" Canvas.Left="199" Canvas.Top="105" Height="173" Width="105"/>
         </Canvas>
-        <Canvas RequestedTheme="Light" Width="Auto" Height="Auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" KeyDown="GeneralKeyDown" Margin="0" >
+        <Canvas x:Name="mainCanvas" RequestedTheme="Light" Width="1080" Height="720" VerticalAlignment="Center" HorizontalAlignment="Center" KeyDown="GeneralKeyDown" Margin="0" MinWidth="1080" MinHeight="720" >
 
             <Canvas.Resources>
 
@@ -358,7 +358,7 @@
                                 <RelativePanel Margin="-1">
                                     <Image Canvas.Left="619" Canvas.Top="212" Source="content/resources\ore.png" Margin="12,0,5,0"/>
                                     <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="79,0,149,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
-                                        <RadioButton Tag="100" Height="37" Width="75" GroupName="BuyOre" IsChecked="True"/>
+                                        <RadioButton Tag="100" Height="37" Width="75" GroupName="BuyOre" IsChecked="True" />
                                     </Viewbox>
                                     <Viewbox Canvas.Left="492" Canvas.Top="229" Margin="115,0,113,-2" Stretch="UniformToFill" RenderTransformOrigin="0.5,0.5" >
                                         <RadioButton Tag="1000" Height="37" Width="75" GroupName="BuyOre"/>

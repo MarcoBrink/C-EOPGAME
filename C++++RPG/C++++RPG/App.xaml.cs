@@ -36,7 +36,8 @@ namespace C____RPG
     /// </summary>
     public App()
     {
-        this.InitializeComponent();
+            ApplicationView.PreferredLaunchViewSize = new Size(800, 800);
+            this.InitializeComponent();
         this.Suspending += OnSuspending;
 
         //API check to ensure the "RequiresPointerMode" property exists, ensuring project is running on build 14393 or later
@@ -106,7 +107,10 @@ namespace C____RPG
             // parameter
             rootFrame.Navigate(typeof(GamePage), e.Arguments);
         }
-     
+
+            ApplicationView.PreferredLaunchViewSize = new Size(800, 800);
+            ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.FullScreen;
+
             // Ensure the current window is active
             Window.Current.Activate();
     }

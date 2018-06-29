@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Threading;
 using System.Collections.Generic;
 using Windows.Media.Core;
+using Windows.UI.Xaml;
 
 
 using System;
